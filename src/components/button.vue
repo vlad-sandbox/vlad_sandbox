@@ -2,6 +2,8 @@
    <div>
      <button @click="updateNumb()">{{text}}</button>
      <p>{{numberValue}}</p>
+     <input v-model="msg"/>
+     <p>{{msg}}</p>
    </div>
 </template>
 
@@ -9,6 +11,11 @@
 export default {
   name: 'app-button',
   props: ['text', 'numberValue'],
+  data () {
+    return {
+      msg: ''
+    }
+  },
   methods: {
     updateNumb () {
       let first = 1
