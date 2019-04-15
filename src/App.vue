@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-      <p>Лешкины сосцы</p>
-    <p>сосцы-молодцы</p>
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/base">Base</router-link>
     </div>
     <router-view/>
   </div>
