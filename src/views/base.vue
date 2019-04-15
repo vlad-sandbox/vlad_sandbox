@@ -2,6 +2,9 @@
   <div class="home">
     <h1>Base Sandbox</h1>
     <app-button :text='buttonText' :numberValue='numb' @buttonClicked="updateNumber"> </app-button>
+    <ul>
+      <li v-for="item in arr" v-if="item > 2">{{item}}</li>
+    </ul>
   </div>
 </template>
 
