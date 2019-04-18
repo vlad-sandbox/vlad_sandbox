@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Base from './views/base.vue'
+import Table from './views/Table.vue'
 
 Vue.use(Router)
 
@@ -21,6 +22,11 @@ export default new Router({
       path: '/base',
       name: 'Base',
       component: Base
+    },
+    {
+      path: '/table',
+      name: 'Table',
+      component: Table
     }
   ]
 })
