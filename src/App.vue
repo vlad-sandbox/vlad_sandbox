@@ -4,12 +4,18 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/table">Table</router-link> |
+      <router-link to="/flexbox">FlexBox</router-link> |
       <router-link to="/base">Base</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 <style lang="stylus">
+body
+  margin 0
+  padding 0
+  height 100%
+  background-color #eaeaea
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased

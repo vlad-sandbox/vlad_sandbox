@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Base from './views/base.vue'
 import Table from './views/Table.vue'
+import FlexBox from './views/FlexBox.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/table',
       name: 'Table',
       component: Table
+    },
+    {
+      path: '/flexbox',
+      name: 'FlexBox',
+      component: FlexBox
     }
   ]
 })
