@@ -73,6 +73,7 @@ const settingsPreset = {
       {
         label: 'Display: ',
         options: [
+          { text: 'display: block', value: { 'display': 'block' } },
           { text: 'display: flex', value: { 'display': 'flex' } },
           { text: 'display: inline-flex', value: { 'display': 'inline-flex' } }
         ],
@@ -81,54 +82,59 @@ const settingsPreset = {
       {
         label: 'Flex-direction: ',
         options: [
+          { text: 'default', value: {} },
           { text: 'flex-direction: row', value: { 'flex-direction': 'row' } },
           { text: 'flex-direction: row-reverse', value: { 'flex-direction': 'row-reverse' } },
           { text: 'flex-direction: column', value: { 'flex-direction': 'column' } },
           { text: 'flex-direction: column-reverse', value: { 'flex-direction': 'column-reverse' } }
         ],
-        value: { 'flex-direction': 'row' }
+        value: {}
       },
       {
         label: 'Flex-wrap: ',
         options: [
+          { text: 'default', value: {} },
           { text: 'flex-wrap: nowrap', value: { 'flex-wrap': 'nowrap' } },
           { text: 'flex-wrap: wrap', value: { 'flex-wrap': 'wrap' } },
           { text: 'flex-wrap: wrap-reverse', value: { 'flex-wrap': 'wrap-reverse' } }
         ],
-        value: { 'flex-wrap': 'nowrap' }
+        value: {}
       },
       {
         label: 'Justify-content: ',
         options: [
+          { text: 'default', value: {} },
           { text: 'justify-content: flex-start', value: { 'justify-content': 'flex-start' } },
           { text: 'justify-content: flex-end', value: { 'justify-content': 'flex-end' } },
           { text: 'justify-content: center', value: { 'justify-content': 'center' } },
           { text: 'justify-content: space-between', value: { 'justify-content': 'space-between' } },
           { text: 'justify-content: space-around', value: { 'justify-content': 'space-around' } }
         ],
-        value: { 'justify-content': 'flex-start' }
+        value: {}
       },
       {
         label: 'Align-items: ',
         options: [
+          { text: 'default', value: {} },
           { text: 'align-items: flex-start', value: { 'align-items': 'flex-start' } },
           { text: 'align-items: flex-end', value: { 'align-items': 'flex-end' } },
           { text: 'align-items: center', value: { 'align-items': 'center' } },
           { text: 'align-items: baseline', value: { 'align-items': 'baseline' } },
           { text: 'align-items: stretch', value: { 'align-items': 'stretch' } }
         ],
-        value: { 'align-items': 'flex-start' }
+        value: {}
       },
       {
         label: 'Align-content: ',
         options: [
+          { text: 'default', value: {} },
           { text: 'align-content: flex-start', value: { 'align-content': 'flex-start' } },
           { text: 'align-content: flex-end', value: { 'align-content': 'flex-end' } },
           { text: 'align-content: space-between', value: { 'align-content': 'space-between' } },
           { text: 'align-content: space-around', value: { 'align-content': 'space-around' } },
           { text: 'align-content: stretch', value: { 'align-content': 'stretch' } }
         ],
-        value: { 'align-content': 'flex-start' }
+        value: {}
       }
     ]
   }
@@ -144,7 +150,7 @@ export default {
   computed: {
     containerStyleComputed () {
       let res = []
-      this.settings.containerSettings.presets.forEach(el => res.push(el.value))
+      this.settings.containerSettings.presets.forEach(el => Object.keys(el.value).length > 0 ? res.push(el.value) : {})
       return res
     }
   }
