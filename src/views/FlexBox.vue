@@ -37,8 +37,8 @@
         </select>
       </label>
       <div class="btns">
-        <button @click.prevent="saveSetup()">Применить</button>
-        <button @click.prevent="closeSetup()">Закрыть</button>
+        <button @click.prevent="saveSetup()">Apply</button>
+        <button @click.prevent="closeSetup()">Close</button>
       </div>
     </div>
   </div>
