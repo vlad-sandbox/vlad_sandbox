@@ -5,11 +5,15 @@
          tag="div"
          :class="['flex-container', {'blur': showSettings}]"
          :style="containerStyleComputed">
-          <div class="flex-element"
-               v-for="block in settings.blockCount.presets[0].value"
+          <div :class="['flex-element', {'changed': changedElem(index)}]"
+               title="Setup"
+               :id="index"
+               :style="styleElement(index)"
+               @click="setup($event, $event.target)"
+               v-for="(block, index) in settings.blockCount.presets[0].value"
                :key="block">{{block}}</div>
     </transition-group>
-    <h3>Стили:</h3>
+    <h3>Flex-container styles:</h3>
     <p>{{containerStyleComputed}}</p>
     <div :class="['setting', {'show': showSettings}]">
         <h2 @click="showSettings = !showSettings">Settings</h2>
@@ -23,6 +27,19 @@
             </select>
           </label>
         </div>
+    </div>
+    <div :class="['contextSetting']" v-show="showSetup" ref="setup">
+      <label v-for="set in flexElementSetting" :key="set.label">{{set.label}}
+        <select v-model="set.value">
+          <option v-for="option in set.options"
+                  :key="option.text"
+                  :value="option.value">{{option.text}}</option>
+        </select>
+      </label>
+      <div class="btns">
+        <button @click.prevent="saveSetup()">Применить</button>
+        <button @click.prevent="closeSetup()">Закрыть</button>
+      </div>
     </div>
   </div>
 </template>
@@ -139,12 +156,176 @@ const settingsPreset = {
     ]
   }
 }
+const flexElementSettings = [
+  {
+    label: 'Order: ',
+    options: [
+      { text: 'default', value: {} },
+      { text: '-3', value: { 'order': -3 } },
+      { text: '-2', value: { 'order': -2 } },
+      { text: '-1', value: { 'order': -1 } },
+      { text: '0', value: { 'order': 0 } },
+      { text: '1', value: { 'order': 1 } },
+      { text: '2', value: { 'order': 2 } },
+      { text: '3', value: { 'order': 3 } },
+      { text: '4', value: { 'order': 4 } },
+      { text: '5', value: { 'order': 5 } },
+      { text: '6', value: { 'order': 6 } },
+      { text: '7', value: { 'order': 7 } },
+      { text: '8', value: { 'order': 8 } },
+      { text: '9', value: { 'order': 9 } }
+    ],
+    value: {}
+  },
+  {
+    label: 'Flex-grow: ',
+    options: [
+      { text: 'default', value: {} },
+      { text: '1', value: { 'flex-grow': 1 } },
+      { text: '2', value: { 'flex-grow': 2 } },
+      { text: '3', value: { 'flex-grow': 3 } },
+      { text: '4', value: { 'flex-grow': 4 } },
+      { text: '5', value: { 'flex-grow': 5 } }
+    ],
+    value: {}
+  },
+  {
+    label: 'Flex-shrink: ',
+    options: [
+      { text: 'default', value: {} },
+      { text: '1', value: { 'flex-shrink': 1 } },
+      { text: '2', value: { 'flex-shrink': 2 } },
+      { text: '3', value: { 'flex-shrink': 3 } },
+      { text: '4', value: { 'flex-shrink': 4 } },
+      { text: '5', value: { 'flex-shrink': 5 } }
+    ],
+    value: {}
+  },
+  {
+    label: 'Flex-basis: ',
+    options: [
+      { text: 'default', value: {} },
+      { text: 'auto', value: { 'flex-basis': 'auto' } },
+      { text: '100', value: { 'flex-basis': '100px' } },
+      { text: '200', value: { 'flex-basis': '200px' } },
+      { text: '300', value: { 'flex-basis': '300px' } },
+      { text: '400', value: { 'flex-basis': '400px' } },
+      { text: '500', value: { 'flex-basis': '500px' } }
+    ],
+    value: {}
+  },
+  {
+    label: 'Flex: ',
+    options: [
+      { text: 'default', value: {} },
+      { text: '0 1 auto', value: { 'flex': '0 1 auto' } },
+      { text: '1 1 auto', value: { 'flex': '1 1 auto' } },
+      { text: '1 0 auto', value: { 'flex': '1 0 auto' } },
+      { text: '1 200px', value: { 'flex': '1 200px' } },
+      { text: '0 200px', value: { 'flex': '1 200px' } },
+      { text: '1 0 200px', value: { 'flex': '1 0 200px' } }
+    ],
+    value: {}
+  },
+  {
+    label: 'Align-self: ',
+    options: [
+      { text: 'default', value: {} },
+      { text: 'flex-start', value: { 'align-self': 'flex-start' } },
+      { text: 'flex-end', value: { 'align-self': 'flex-end' } },
+      { text: 'center', value: { 'align-self': 'center' } },
+      { text: 'baseline', value: { 'align-self': 'baseline' } },
+      { text: 'stretch', value: { 'align-self': 'stretch' } }
+    ],
+    value: {}
+  },
+  {
+    label: 'Margin: ',
+    options: [
+      { text: 'default', value: {} },
+      { text: 'auto', value: { 'margin': 'auto' } }
+    ],
+    value: {}
+  }
+]
 export default {
   name: 'flexbox',
   data () {
     return {
       showSettings: false,
-      settings: settingsPreset
+      showSetup: false,
+      settings: settingsPreset,
+      flexElementSetting: flexElementSettings,
+      savedConfigs: [],
+      activeElem: ''
+    }
+  },
+  watch: {
+    activeElem (to, fr) {
+      if (to.id && this.savedConfigs[to.id] !== undefined) {
+        this.getSetup(to.id)
+      } else {
+        this.resetSetup()
+      }
+    }
+  },
+  methods: {
+    setup (e, t) {
+      this.clearActive(t)
+      let cont = this.$refs.setup
+      this.showSetup = true
+      cont.style.top = e.y + 'px'
+      cont.style.left = e.x + 'px'
+    },
+    clearActive (elem) {
+      Array.from(document.getElementsByClassName('flex-element')).forEach(el => {
+        if (elem && elem.id === el.id) {
+          el.classList.add('active')
+        } else {
+          el.classList.remove('active')
+        }
+      })
+      this.activeElem = elem
+    },
+    saveSetup () {
+      this.showSetup = false
+      this.setSetup(this.activeElem.id)
+      this.clearActive('')
+    },
+    closeSetup () {
+      this.showSetup = false
+      this.clearActive('')
+    },
+    resetSetup () {
+      this.flexElementSetting.forEach(fes => {
+        fes.value = fes.options.filter(opt => opt.text === 'default')[0].value
+      })
+    },
+    setSetup (id) {
+      this.savedConfigs[id] = []
+      this.flexElementSetting.forEach(el => {
+        this.savedConfigs[id].push(el.value)
+      })
+    },
+    getSetup (id) {
+      let arr = this.savedConfigs[id]
+      arr.forEach((el, i) => {
+        this.flexElementSetting[i].value = el
+      })
+    },
+    styleElement (index) {
+      return this.savedConfigs[index] || ''
+    },
+    changedElem (index) {
+      let res = false
+      if (this.savedConfigs[index]) {
+        this.savedConfigs[index].forEach(setting => {
+          if (Object.keys(setting).length > 0) {
+            res = true
+          }
+        })
+      }
+      return res
     }
   },
   computed: {
@@ -175,6 +356,38 @@ export default {
     cursor: pointer;
   }
 
+  .contextSetting {
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+    background-color: #42b983;
+    transition: all .2s;
+    border: 1px solid white;
+    box-shadow: 2px 3px 6px #7f92a5;
+  }
+
+  .btns {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btns button {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: white;
+    color: #2c3e50;
+    font-weight: bold;
+    transition: all .3s;
+    box-shadow: 2px 3px 6px #7f92a5;
+  }
+
+  .btns button:hover {
+    color: #42b983;
+  }
+
   .setting.show {
     height: auto;
     width: auto;
@@ -186,7 +399,7 @@ export default {
     margin: 5px;
   }
 
-  .setting label {
+  .setting label, .contextSetting label {
     color: white;
     font-size: 20px;
     padding: 5px;
@@ -194,7 +407,7 @@ export default {
     justify-content: space-between;
   }
 
-  .setting label select {
+  .setting label select, .contextSetting label select{
     border: none;
     border-radius: 5px;
     background-color: white;
@@ -229,13 +442,22 @@ export default {
     color: white;
     font-size: 20px;
     font-weight: bold;
-    cursor: default;
+    cursor: pointer;
     margin: 5px;
     min-width: 60px;
     min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all .3s;
+  }
+
+  .flex-element.changed {
+    background-color: #03a9f4;
+  }
+
+  .flex-element:hover, .flex-element.active {
+    background-color: #42b983;
   }
 
   .list-enter-active, .list-leave-active {
