@@ -1,23 +1,26 @@
 <template>
   <div id="wrap">
   <h1>Draggable</h1>
-    <!--<transition-group name="list" tag="div" class="content"> -->
-    <!--<div class="content"> 
-      <div v-for="(group, groupIndex) in groups[0]" :key="group.name" class="drag-group" draggable> -->
+    <transition-group name="list" tag="div" class="content">
+      <div v-for="(group, i) in groups" :key="group.name" class="drag-group" draggable
+           @dragstart.self="setDragStart($event, $event.target, {groups, group, i})"
+           @drop="setDropGroup($event, $event.target, {groups, group, i})"
+           @dragend="setDragEnd($event.target)"
+           @dragover.prevent="() => {}"
+           @dragenter.prevent="setDragEnter($event.target, group, true)"
+           @dragleave="setDragLeave($event, $event.target, group)">
          <transition-group name="list" tag="div" class="content">
-            <div v-for="(col, columnIndex) in groups[0].list"
-                 :key="col.columnName + columnIndex + groups[0].name" class="drag-item" draggable
-                 @dragstart="setDragStart($event, $event.target, {col, columnIndex, groupIndex: 0})"
-                 @drop="setDrop($event, $event.target, {col, columnIndex, groupIndex: 0})"
-
-                 @dragend="setDragEnd($event.target)"
-                 @dragover.prevent="() => {}"
-                 @dragenter.prevent="setDragEnter($event, $event.target, {col, columnIndex, groupIndex: 0})"
-                 @dragleave="setDragLeave($event.target)">{{col.columnName}}</div>
+            <div v-for="(col, index) in group.list"
+               :key="col.columnName" class="drag-item" draggable
+               @dragstart="setDragStart($event, $event.target, {group, col, index})"
+               @drop="setDrop($event, $event.target, {group, col, index})"
+               @dragend="setDragEnd($event.target)"
+               @dragover.prevent="() => {}"
+               @dragenter.prevent="setDragEnter($event.target, group)"
+               @dragleave="setDragLeave($event.target)">{{col.columnName}}</div>
          </transition-group>
-       <!-- </div>
-       transition-group> -->
-  <!-- </div> -->
+       </div>
+    </transition-group>
   </div>
 </template>
 
@@ -44,55 +47,84 @@ const dataSet = [
       { 'columnName': 'Column 6', 'order': 6, 'pinned': false },
       { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
     ]
+  },
+  { name: 'group 5',
+    list: [
+      { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
+      { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
+      { 'columnName': 'Column 3', 'order': 3, 'pinned': false },
+      { 'columnName': 'Column 4', 'order': 4, 'pinned': false },
+      { 'columnName': 'Column 5', 'order': 5, 'pinned': false },
+      { 'columnName': 'Column 6', 'order': 6, 'pinned': false },
+      { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
+    ]
+  },
+  { name: 'group 4',
+    list: [
+      { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
+      { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
+      { 'columnName': 'Column 3', 'order': 3, 'pinned': false },
+      { 'columnName': 'Column 4', 'order': 4, 'pinned': false },
+      { 'columnName': 'Column 5', 'order': 5, 'pinned': false },
+      { 'columnName': 'Column 6', 'order': 6, 'pinned': false },
+      { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
+    ]
   }
+]
+const dataSetColumns = [
+  { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
+  { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
+  { 'columnName': 'Column 3', 'order': 3, 'pinned': false },
+  { 'columnName': 'Column 4', 'order': 4, 'pinned': false },
+  { 'columnName': 'Column 5', 'order': 5, 'pinned': false },
+  { 'columnName': 'Column 6', 'order': 6, 'pinned': false },
+  { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
 ]
 export default {
   name: 'draggable-boxes',
   data () {
     return {
       groups: dataSet,
+      columns: dataSetColumns,
       dataTransfer: {}
     }
-  },
-  watch: {
-  },
-  created () {
   },
   methods: {
     setDragStart (e, trgt, data) {
       trgt.style.opacity = '.5'
-      /* e.dataTransfer.effectAllowed = 'move'
-      e.dataTransfer.dropEffect = 'move'
-      e.dataTransfer.setData('json', JSON.stringify(data))
-      console.log(JSON.stringify(data)) */
       this.dataTransfer = data
     },
     setDrop (e, trgt, dropTarget) {
-      // let data = JSON.parse(e.dataTransfer.getData('json'))
       let data = this.dataTransfer
-      console.log(data)
-      /* colDropped = this.columns.filter(el => el.columnName === colDropped.columnName)[0]
-      let toIndex = this.columns.findIndex(el => el.columnName === cc.columnName) */
-      this.groups[data.groupIndex].list.splice(data.columnIndex, 1)
-      this.groups[dropTarget.groupIndex].list.splice(dropTarget.columnIndex, 0, data.col)
-      trgt.classList.remove('over')
-    },
-    setDragEnd (e) {
-      e.style.opacity = '1'
-      this.dataTransfer = {}
-    },
-    setDragEnter (e, trgt, item) {
-      if (item.groupIndex === this.dataTransfer.groupIndex) {
-        trgt.classList.add('over')
+      if (this.dataTransfer.i !== undefined) {
+        return e.preventDefault()
+      }
+      if (dropTarget.group.name === data.group.name) {
+        data.group.list.splice(data.index, 1)
+        data.group.list.splice(dropTarget.index, 0, data.col)
+        trgt.classList.remove('over')
       }
     },
-    setDragLeave (e) {
-      e.classList.remove('over')
-    }
-  },
-  computed: {
-    columnsComputed () {
-      return this.columns.reduce((pr, cur) => pr.list.concat(cur.list))
+    setDropGroup (e, trgt, dropTarget) {
+      if (this.dataTransfer.index !== undefined) {
+        return e.preventDefault()
+      }
+      let data = this.dataTransfer
+      data.groups.splice(data.i, 1)
+      data.groups.splice(dropTarget.i, 0, data.group)
+      trgt.classList.remove('over')
+    },
+    setDragEnd (t) {
+      t.style.opacity = '1'
+      this.dataTransfer = {}
+    },
+    setDragEnter (t, group, primaryAdd) {
+      if (group.name === this.dataTransfer.group.name || primaryAdd) {
+        t.classList.add('over')
+      }
+    },
+    setDragLeave (e, t, group) {
+      t.classList.remove('over')
     }
   }
 }
@@ -102,6 +134,9 @@ export default {
     display flex
     flex-direction column
     margin 0 15%
+    >.content
+      flex-direction row
+      justify-content space-between
 
   .content
     display flex
@@ -113,6 +148,10 @@ export default {
 
   .drag-group
     border-radius 10px
+    flex-grow 1
+    &.over
+      .content
+        border 2px dotted green
 
   .drag-item
     position relative
@@ -142,5 +181,5 @@ export default {
       &:after
         width 80%
   .list-move
-    transition transform 5s
+    transition transform .5s
 </style>
