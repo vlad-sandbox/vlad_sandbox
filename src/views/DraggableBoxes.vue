@@ -2,23 +2,20 @@
   <div id="wrap">
   <h1>Draggable</h1>
     <transition-group name="list" tag="div" class="content">
-      <div v-for="(group, i) in groups" :key="group.name" class="drag-group" draggable
+      <div v-for="(group, i) in groups" :key="group.name" class="drag-group" draggable @dragover.prevent
            @dragstart.self="setDragStart($event, $event.target, {groups, group, i, target: 'group'})"
-           @drop="setDropGroup($event, $event.target, {groups, group, i, target: 'group'})"
+           @drop="setDrop($event, $event.target, {groups, group, i, target: 'group'})"
            @dragend="setDragEnd($event, $event.target, {groups, group, i, target: 'group'})"
-           @dragover.prevent="() => {}"
            @dragenter.prevent="setDragEnter($event, $event.target, {groups, group, i, target: 'group'})"
            @dragleave="setDragLeave($event, $event.target, {groups, group, i, target: 'group'})">
            <h1>{{group.name}}</h1>
          <transition-group name="list" tag="div" class="content">
-            <div v-for="(col, index) in group.list"
-               :key="col.columnName" class="drag-item" draggable
-               @dragstart="setDragStart($event, $event.target, {group, col, index, target: i + 'column'})"
-               @drop="setDrop($event, $event.target, {group, col, index, target: i + 'column'})"
-               @dragend="setDragEnd($event, $event.target, {group, col, index, target: i + 'column'})"
-               @dragover.prevent="() => {}"
-               @dragenter.prevent="setDragEnter($event, $event.target, {group, col, index, target: i + 'column'})"
-               @dragleave="setDragLeave($event, $event.target, {group, col, index, target: i + 'column'})">
+            <div v-for="(col, index) in group.list" :key="col.columnName" class="drag-item" draggable @dragover.prevent
+               @dragstart.self="setDragStart($event, $event.target, {group, col, index, target: group.name})"
+               @drop="setDrop($event, $event.target, {group, col, index, target: group.name})"
+               @dragend="setDragEnd($event, $event.target, {group, col, index, target: group.name})"
+               @dragenter.prevent.self="setDragEnter($event, $event.target, {group, col, index, target: group.name})"
+               @dragleave="setDragLeave($event, $event.target, {group, col, index, target: group.name})">
                  {{col.columnName}}
             </div>
          </transition-group>
@@ -29,7 +26,7 @@
 
 <script>
 const dataSet = [
-  { name: 'group 1',
+  { name: 'Group 1',
     list: [
       { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
       { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
@@ -40,7 +37,7 @@ const dataSet = [
       { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
     ]
   },
-  { name: 'group 2',
+  { name: 'Group 2',
     list: [
       { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
       { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
@@ -51,7 +48,7 @@ const dataSet = [
       { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
     ]
   },
-  { name: 'group 5',
+  { name: 'Group 3',
     list: [
       { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
       { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
@@ -62,7 +59,7 @@ const dataSet = [
       { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
     ]
   },
-  { name: 'group 4',
+  { name: 'Group 4',
     list: [
       { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
       { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
@@ -74,21 +71,11 @@ const dataSet = [
     ]
   }
 ]
-const dataSetColumns = [
-  { 'columnName': 'Column 1', 'order': 1, 'pinned': false },
-  { 'columnName': 'Column 2', 'order': 2, 'pinned': false },
-  { 'columnName': 'Column 3', 'order': 3, 'pinned': false },
-  { 'columnName': 'Column 4', 'order': 4, 'pinned': false },
-  { 'columnName': 'Column 5', 'order': 5, 'pinned': false },
-  { 'columnName': 'Column 6', 'order': 6, 'pinned': false },
-  { 'columnName': 'Column 7', 'order': 7, 'pinned': false }
-]
 export default {
   name: 'draggable-boxes',
   data () {
     return {
       groups: dataSet,
-      columns: dataSetColumns,
       transfer: {}
     }
   },
@@ -105,26 +92,23 @@ export default {
       if (data.target !== this.transfer.target) {
         return e.preventDefault()
       }
-      if (data.group.name === this.transfer.group.name) {
+      if (data.target === 'group') {
+        this.paste(this.transfer.groups, this.transfer.i, data.i, this.transfer.group)
+      } else if (data.group.name === this.transfer.group.name) {
         this.paste(this.transfer.group.list, this.transfer.index, data.index, this.transfer.col)
-        t.classList.remove('over')
       }
-    },
-    setDropGroup (e, t, data) {
-      if (data.target !== this.transfer.target) {
-        return e.preventDefault()
-      }
-      this.paste(this.transfer.groups, this.transfer.i, data.i, this.transfer.group)
       t.classList.remove('over')
     },
     setDragEnter (e, t, data) {
       if (data.target !== this.transfer.target) {
+        e.stopPropagation()
         return e.preventDefault()
       }
       t.classList.add('over')
     },
     setDragLeave (e, t, data) {
       if (data.target !== this.transfer.target) {
+        e.stopPropagation()
         return e.preventDefault()
       }
       t.classList.remove('over')
