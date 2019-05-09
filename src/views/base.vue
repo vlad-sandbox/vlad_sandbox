@@ -3,7 +3,7 @@
     <h1>Base Sandbox</h1>
     <app-button :text='buttonText' :numberValue='numb' @buttonClicked="updateNumber"> </app-button>
     <ul>
-      <li v-for="item in arr" v-if="item > 2">{{item}}</li>
+      <li v-for="item in arr" v-if="item > 2" :key="item">{{item}}</li>
     </ul>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
       this.numb = this.numb + val1
     },
     checkUser () {
-      console.log('Check User')
+      // console.log('Check User')
     }
   },
 
