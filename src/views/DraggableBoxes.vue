@@ -94,7 +94,7 @@ export default {
       }
       if (data.target === 'group') {
         this.paste(this.transfer.groups, this.transfer.i, data.i, this.transfer.group)
-      } else if (data.group.name === this.transfer.group.name) {
+      } else {
         this.paste(this.transfer.group.list, this.transfer.index, data.index, this.transfer.col)
       }
       t.classList.remove('over')
