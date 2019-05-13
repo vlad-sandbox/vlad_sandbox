@@ -19,8 +19,18 @@
 export default {
   name: 'DragDrop',
   props: {
-    data: Array,
-    target: String
+    data: {
+      type: Array,
+      required: true
+    },
+    target: {
+      type: String,
+      required: true
+    },
+    showTree: {
+      type: Boolean,
+      required: false
+    }
   },
   data () {
     return {
@@ -32,7 +42,6 @@ export default {
     setDragStart (e, t, data) {
       t.style.opacity = '.5'
       this.transfer = data
-      this.clearOver()
     },
     setDragEnd (e, t, data) {
       t.style.opacity = '1'
@@ -45,7 +54,6 @@ export default {
         return e.preventDefault()
       }
       this.paste(this.transfer.items, this.transfer.i, data.i, this.transfer.item)
-      t.classList.remove('over')
     },
     setDragEnter (e, t, data) {
       if (data.target !== this.transfer.target) {
