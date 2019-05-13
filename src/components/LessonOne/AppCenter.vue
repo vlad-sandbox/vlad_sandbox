@@ -1,6 +1,6 @@
 <template>
 <div class = "center">
-  <p v-for = "message in messages" :class="message.side">{{message.text}}</p>
+  <p v-for = "(message, i) in messages" :key="i" :class="message.side"><span :style="{'color': message.colorname}">{{message.username}}</span>:{{message.text}}</p>
 </div>
 </template>
 <script>

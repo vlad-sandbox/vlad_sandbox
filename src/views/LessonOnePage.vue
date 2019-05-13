@@ -17,10 +17,12 @@ export default {
     }
   },
   methods: {
-    getmessage (value, sideValue) {
+    getmessage (value, sideValue, loginuser, coloruser) {
       let obj = {
         text: value,
-        side: sideValue
+        side: sideValue,
+        username: loginuser,
+        colorname: coloruser
       }
       this.message.push(obj)
     }

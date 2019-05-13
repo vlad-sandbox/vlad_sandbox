@@ -1,7 +1,11 @@
 <template>
-  <div class="left">
-    <input name="inputleft" placeholder="Введите текст" maxlength="20" v-model="text" @change="sendmessage()">
-    <button @click="sendmessage()" class="Send">Send</button>
+  <div class="sender">
+    <input placeholder="Введите Логин" maxlength="9" v-model.lazy="login" v-if = "!login">
+    <button v-if = "!login">Применить</button>
+    <input name="inputleft" placeholder="Введите текст" maxlength="20" v-model="text" @change="sendmessage()" v-if = "login">
+    <button @click="sendmessage()" class="Send" v-if = "login">Send</button>
+    <input type="color" v-model="coloruser" @change="Logme()" ref="reftest" v-if = "login"/>
+    <p ref="username" v-if = "login">{{login}}</p>
   </div>
 </template>
 
@@ -11,22 +15,28 @@ export default {
   props: ['propsside'],
   data () {
     return {
-      text: ''
+      text: '',
+      coloruser: '#00ff00',
+      login: ''
     }
   },
   methods: {
     sendmessage () {
-      if (this.text === '') {
+      if (this.text === '' || this.login === '') {
         return
       }
-      this.$emit('pushmessage', this.text, this.propsside)
+      this.$emit('pushmessage', this.text, this.propsside, this.login, this.coloruser)
       this.text = ''
+    },
+    Logme () {
+      // this.$refs.reftest.style.width = "200px"
+      this.$refs.username.style.color = this.coloruser
     }
   }
 }
 </script>
 <style lang="stylus">
-  .left
+  .sender
     width:33%
     border 1px solid #42b983
     border-radius 15px
