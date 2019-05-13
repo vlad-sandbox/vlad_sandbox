@@ -10,7 +10,6 @@
 
 <script>
 import AppButton from '@/components/button.vue'
-
 export default {
   name: 'base',
   data () {
