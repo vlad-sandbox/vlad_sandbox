@@ -1,6 +1,6 @@
 <template>
-<div class="content">
-  <app-sender @pushmessage="getmessage" propsside="left-side"></app-sender>
+<div class="chat">
+  <app-sender2 @pushmessage="getmessage" side="left-side"></app-sender2>
   <app-center :messages = "message"></app-center>
   <app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>
 </div>
@@ -8,6 +8,7 @@
 
 <script>
 import AppSender from '@/components/LessonOne/Sender.vue'
+import AppSender2 from '@/components/LessonOne/SenderV2.vue'
 import AppCenter from '@/components/LessonOne/AppCenter.vue'
 export default {
   name: 'lesson-one',
@@ -29,12 +30,13 @@ export default {
   },
   components: {
     AppSender,
-    AppCenter
+    AppCenter,
+    AppSender2
   }
 }
 </script>
-<style>
-  .content {
+<style scoped>
+  .chat {
     display:flex;
     justify-content: space-between;
   }
