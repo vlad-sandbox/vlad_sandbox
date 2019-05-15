@@ -6,7 +6,8 @@
       <router-link to="/table">Table</router-link> |
       <router-link to="/flexbox">FlexBox</router-link> |
       <router-link to="/draggable">DraggableBox</router-link> |
-      <router-link to="/base">Base</router-link>
+      <router-link to="/base">Base</router-link> |
+      <router-link to="/LessonOne">Lesson-1</router-link>
     </div>
     <router-view/>
   </div>
