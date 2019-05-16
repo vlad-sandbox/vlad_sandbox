@@ -1,16 +1,12 @@
 <template>
 <div class="wrap">
-    <div class="clear">
-        <ul>Привет</ul>
-    </div>
+    <div class="clear"></div>
     <div class="content">
         <app-center :messages = "message"></app-center>
         <app-sender @pushmessage="getmessage" propsside="left-side"></app-sender>
         <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
-    </div>    
-    <div class="clear">
-        <ul>Привет</ul>
     </div>
+    <div class="clear"></div>
 </div>
 
 </template>
