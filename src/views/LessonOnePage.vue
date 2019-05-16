@@ -1,14 +1,22 @@
 <template>
-<div class="chat">
-  <app-sender2 @pushmessage="getmessage" side="left-side"></app-sender2>
-  <app-center :messages = "message"></app-center>
-  <app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>
+<div class="wrap">
+    <div class="clear">
+        <ul>Привет</ul>
+    </div>
+    <div class="content">
+        <app-center :messages = "message"></app-center>
+        <app-sender @pushmessage="getmessage" propsside="left-side"></app-sender>
+        <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
+    </div>    
+    <div class="clear">
+        <ul>Привет</ul>
+    </div>
 </div>
+
 </template>
 
 <script>
 import AppSender from '@/components/LessonOne/Sender.vue'
-import AppSender2 from '@/components/LessonOne/SenderV2.vue'
 import AppCenter from '@/components/LessonOne/AppCenter.vue'
 export default {
   name: 'lesson-one',
@@ -30,14 +38,32 @@ export default {
   },
   components: {
     AppSender,
-    AppCenter,
-    AppSender2
+    AppCenter
   }
 }
 </script>
-<style scoped>
-  .chat {
-    display:flex;
-    justify-content: space-between;
+<style>
+  .wrap {
+     display: flex;
+  }
+    .content {
+        background: white;
+        flex-grow: 1;
+        flex-shrink: 1;
+        height: 100%;
+    }
+    .clear {
+        width: 500px;
+        flex-shrink: 2;
+        height: 100%;
+    }
+  .sender {
+    flex-grow: 1;
+    flex-shrink: 2;
+  }
+  .center {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: scroll;
   }
 </style>

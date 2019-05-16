@@ -29,7 +29,6 @@ export default {
       this.text = ''
     },
     Logme () {
-      // this.$refs.reftest.style.width = "200px"
       this.$refs.username.style.color = this.coloruser
     }
   }
