@@ -41,8 +41,9 @@ export default {
   .sender
     display flex
     padding 15px
+    flex-shrink 0
   .message_input, .username_input
-    flex-grow 3
+    flex-grow 1
     margin-left 5px
   .color
     height calc(100% + 8px)
