@@ -1,7 +1,7 @@
 <template>
 <div class="wrap">
     <div class="clear"></div>
-    <div class="content">
+    <div class="center">
         <app-center :messages = "message"></app-center>
         <app-sender @pushmessage="getmessage" propsside="left-side"></app-sender>
         <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
@@ -40,26 +40,20 @@ export default {
 </script>
 <style>
   .wrap {
-     display: flex;
-  }
-    .content {
-        background: white;
-        flex-grow: 1;
-        flex-shrink: 1;
-        height: 100%;
-    }
-    .clear {
-        width: 500px;
-        flex-shrink: 2;
-        height: 100%;
-    }
-  .sender {
-    flex-grow: 1;
-    flex-shrink: 2;
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    overflow: hidden;
   }
   .center {
-    flex-grow: 1;
-    flex-shrink: 1;
-    overflow: scroll;
+    background: white;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 3;
+  }
+  .clear {
+    flex-grow: 1;    
   }
 </style>
