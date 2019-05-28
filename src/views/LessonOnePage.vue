@@ -3,7 +3,7 @@
     <div class="clear"></div>
     <div class="center">
         <app-center :messages = "message"></app-center>
-        <app-sender @pushmessage="getmessage" propsside="left-side"></app-sender>
+        <app-sender @pushmessage="getmessage" propsside="left-side" ></app-sender>
         <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
     </div>
     <div class="clear"></div>
@@ -30,6 +30,11 @@ export default {
         colorname: coloruser
       }
       this.message.push(obj)
+    },
+    lastmessagestext () {
+      let last = this.message.length - 1
+      console.log(this.message)
+      console.log(last)
     }
   },
   components: {
@@ -54,6 +59,6 @@ export default {
     flex-grow: 3;
   }
   .clear {
-    flex-grow: 1;    
+    flex-grow: 1;
   }
 </style>

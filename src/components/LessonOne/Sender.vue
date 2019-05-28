@@ -3,7 +3,7 @@
     <input class="username_input" placeholder="Введите Логин" maxlength="9" v-model.lazy="login" v-if = "!login">
     <button v-if = "!login">Применить</button>
     <p ref="username" v-if = "login">{{login}} </p>
-    <input class="message_input" autofocus placeholder="Введите текст" v-model="text" @change="sendmessage($event.target)" v-if = "login">
+    <input class="message_input" autofocus placeholder="Введите текст" v-model="text" @change="sendmessage($event.target)" v-if = "login" v-on:keyup.up = "showlastmessages">
     <button class="send" @click="sendmessage()" v-if = "login">Send</button>
     <input class="color" type="color" v-model="coloruser" @change="Logme()" ref="reftest" v-if = "login"/>
   </div>
@@ -24,7 +24,7 @@ export default {
     sendmessage (target) {
       // В функцию передал указатель на элемент, из которого была вызвана функция, задал ему принудительно
       // установку курсора в него же с помощью target.focus(), иначе сбивалось каждый раз
-      target.focus()
+     // target.focus()
       if (this.text === '' || this.login === '') {
         return
       }
@@ -33,6 +33,9 @@ export default {
     },
     Logme () {
       this.$refs.username.style.color = this.coloruser
+    },
+    showlastmessages () {
+      this.$emit('getLastMessage')
     }
   }
 }
