@@ -3,7 +3,7 @@
     <div class="clear"></div>
     <div class="center">
         <app-center :messages = "message"></app-center>
-        <app-sender @pushmessage="getmessage" propsside="left-side" ></app-sender>
+        <app-sender @pushmessage="getmessage" propsside="left-side" @getLastMessage="lastmessagestext ()" :lastmesaga="lastmessage"></app-sender>
         <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
     </div>
     <div class="clear"></div>
@@ -18,23 +18,26 @@ export default {
   name: 'lesson-one',
   data () {
     return {
-      message: []
+      message: [],
+      lastmessage: ''
     }
   },
   methods: {
-    getmessage (value, sideValue, loginuser, coloruser) {
+    getmessage (value, sideValue, loginuser, coloruser,editmode) {
       let obj = {
         text: value,
         side: sideValue,
         username: loginuser,
         colorname: coloruser
       }
+      if (editmode === true) {
+        this.message.pop()
+      } 
       this.message.push(obj)
     },
     lastmessagestext () {
       let last = this.message.length - 1
-      console.log(this.message)
-      console.log(last)
+      this.lastmessage = this.message[last].text
     }
   },
   components: {
