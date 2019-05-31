@@ -1,9 +1,9 @@
 <template>
 <div class="wrap">
     <div class="clear"></div>
-    <div class="content">
+    <div class="center">
         <app-center :messages = "message"></app-center>
-        <app-sender @pushmessage="getmessage" propsside="left-side"></app-sender>
+        <app-sender @pushmessage="getmessage" propsside="left-side" @getLastMessage="lastmessagestext ()" :lastmesaga="lastmessage"></app-sender>
         <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
     </div>
     <div class="clear"></div>
@@ -18,18 +18,26 @@ export default {
   name: 'lesson-one',
   data () {
     return {
-      message: []
+      message: [],
+      lastmessage: ''
     }
   },
   methods: {
-    getmessage (value, sideValue, loginuser, coloruser) {
+    getmessage (value, sideValue, loginuser, coloruser,editmode) {
       let obj = {
         text: value,
         side: sideValue,
         username: loginuser,
         colorname: coloruser
       }
+      if (editmode === true) {
+        this.message.pop()
+      } 
       this.message.push(obj)
+    },
+    lastmessagestext () {
+      let last = this.message.length - 1
+      this.lastmessage = this.message[last].text
     }
   },
   components: {
@@ -40,26 +48,20 @@ export default {
 </script>
 <style>
   .wrap {
-     display: flex;
-  }
-    .content {
-        background: white;
-        flex-grow: 1;
-        flex-shrink: 1;
-        height: 100%;
-    }
-    .clear {
-        width: 500px;
-        flex-shrink: 2;
-        height: 100%;
-    }
-  .sender {
-    flex-grow: 1;
-    flex-shrink: 2;
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    overflow: hidden;
   }
   .center {
+    background: white;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 3;
+  }
+  .clear {
     flex-grow: 1;
-    flex-shrink: 1;
-    overflow: scroll;
   }
 </style>
