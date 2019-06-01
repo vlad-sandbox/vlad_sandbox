@@ -23,16 +23,17 @@ export default {
     }
   },
   methods: {
-    getmessage (value, sideValue, loginuser, coloruser,editmode) {
+    getmessage (value, sideValue, loginuser, coloruser, editmode) {
       let obj = {
         text: value,
         side: sideValue,
         username: loginuser,
-        colorname: coloruser
+        colorname: coloruser,
+        changed: editmode
       }
       if (editmode === true) {
         this.message.pop()
-      } 
+      }
       this.message.push(obj)
     },
     lastmessagestext () {
