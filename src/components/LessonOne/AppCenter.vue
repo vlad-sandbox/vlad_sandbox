@@ -2,7 +2,7 @@
 <div class="message-container" ref="messageContainer">
   <div :class="message.side" v-for="(message, i) in messages" :key="i" class="wrapperP">
     <p :class="{active: message.changed}">
-      <span :style="{'color': message.colorname}">{{message.username}}</span>:{{message.text}}
+      <span :style="{'color': message.colorname}">{{message.username}}</span>:{{message.text}}<br><span v-if="message.changed" class="edited">edited</span>
     </p>
   </div>
 </div>
@@ -31,6 +31,11 @@ export default {
 }
 </script>
 <style scoped="true" lang="stylus">
+  .edited
+    color red
+    font-style italic
+    text-align right
+    float right
   .wrapperP
     display flex
   p
@@ -39,7 +44,7 @@ export default {
     padding: 10px
     border: 4px outset
     border-radius: 10px
-    background-color c9ffd5
+    background-color #E2FFC7
   &.active
     background-color #dfdbdd
 </style>
