@@ -1,8 +1,10 @@
 <template>
 <div class="message-container" ref="messageContainer">
-  <p v-for="(message, i) in messages" :key="i" :class="message.side">
-    <span :style="{'color': message.colorname}">{{message.username}}</span>:{{message.text}}
-  </p>
+  <div class="wrapperP">
+    <p v-for="(message, i) in messages" :key="i" :class="[message.side, {active: message.changed}]">
+      <span :style="{'color': message.colorname}">{{message.username}}</span>:{{message.text}}
+    </p>
+  </div>
 </div>
 </template>
 <script>
@@ -28,16 +30,23 @@ export default {
   }
 }
 </script>
+<style scoped="true" lang="stylus">
+  .wrapperP
+    color red
+  p
+    background-color blue
+    line-height 1
+  &.active
+    background-color grey
+</style>
 <style lang="stylus">
   .message-container
-    display flex
+    //display flex
     flex-direction column
     flex-grow 1
     padding 10px
-    overflow-y auto
+    //overflow-y auto
     scroll-behavior smooth
-    p
-      line-height 1
   .left-side
     float left
     width 100%

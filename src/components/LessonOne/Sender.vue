@@ -1,10 +1,16 @@
 <template>
   <div class="sender">
+      <!--Поле ввода логина-->
     <input class="username_input" placeholder="Введите Логин" maxlength="9" v-model.lazy="login" v-if = "!login">
+      <!--Кнопка применения логина-->
     <button v-if = "!login">Применить</button>
+      <!--Вывод логина-->
     <p ref="username" v-if = "login">{{login}} </p>
+      <!--Поле ввода сообщения-->
     <input class="message_input" autofocus placeholder="Введите текст" v-model="text" @change="sendmessage($event.target)" v-if = "login" @keyup.up = "showlastmessages()">
+      <!--Кнопка отправки сообщения-->
     <button class="send" @click="sendmessage()" v-if = "login">Send</button>
+      <!--Поле выбора цвета логина-->
     <input class="color" type="color" v-model="coloruser" @change="Logme()" ref="reftest" v-if = "login"/>
   </div>
 </template>
