@@ -1,14 +1,16 @@
 <template>
 <div class="wrap">
     <div class="clear">
-        <button class="blackthemebutton" @click="blackthemefunc()"></button>
+        <button class="blackthembutton" @click="blackthemfunc()">black</button>
     </div>
     <div class="center">
         <app-center :messages = "message"></app-center>
         <app-sender @pushmessage="getmessage" propsside="left-side" @getLastMessage="lastmessagestext ()" :lastmesaga="lastmessage"></app-sender>
         <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
     </div>
-    <div class="clear"></div>
+    <div class="clear">
+        <button class="whitethembutton" @click="whitethemfunc()">white</button>
+  </div>
 </div>
 
 </template>
@@ -21,7 +23,9 @@ export default {
   data () {
     return {
       message: [],
-      lastmessage: ''
+      lastmessage: '',
+      blackthemflag: false,
+      whitethemflag: false
     }
   },
   methods: {
@@ -42,8 +46,13 @@ export default {
       let last = this.message.length - 1
       this.lastmessage = this.message[last].text
     },
-    blackthemefunc () {
-      this.blacktheme = "true"
+    blackthemfunc () {
+      this.blackthemflag = true
+      this.$emit('setblacktheme', this.blackthemflag)
+    },
+    whitethemfunc () {
+      this.whitethemflag = true
+      this.$emit('setwhitetheme', this.whitethemflag)
     }
   },
   components: {

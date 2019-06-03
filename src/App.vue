@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app" :class="[{'blackthemapp': blackflag}, {'whitethemapp': whiteflag} ]">
+    <!-- <div :class="['wrapper', {'grey': greyFlag}, {'green': greenFlag}]"> -->
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
@@ -7,12 +8,40 @@
       <router-link to="/flexbox">FlexBox</router-link> |
       <router-link to="/draggable">DraggableBox</router-link> |
       <router-link to="/base">Base</router-link> |
-      <router-link to="/LessonOne">Lesson-1</router-link>
+      <router-link to="/LessonOne">VL Chat</router-link> | 
+      <router-link to="/Variables">Variables</router-link>
     </div>
-    <router-view/>
+    <router-view @setblacktheme="appendblackthem" @setwhitetheme="appendwhitethem"></router-view>
   </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      blackflag: false,
+      whiteflag: false
+    }
+  },
+  methods: {
+    appendblackthem (blackthemflag) {
+      this.blackflag = blackthemflag
+      this.whiteflag = false
+    },
+    appendwhitethem (whitethemflag) {
+      this.whiteflag = whitethemflag
+      this.blackflag = false
+    }
+  }
+}
+</script>
 <style lang="stylus">
+.blackthemapp
+  background-color black
+  transition all .5s
+  transform: scale(0.1,0.2)
+.whitethemapp
+  background-color white
+  transition all .5s
 body
   margin 0
   padding 0

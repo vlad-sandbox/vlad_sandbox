@@ -6,6 +6,7 @@ import Table from './views/Table.vue'
 import FlexBox from './views/FlexBox.vue'
 import DraggableBoxes from './views/DraggableBoxes.vue'
 import LessonOne from './views/LessonOnePage.vue'
+import Variables from './views/Variables.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -44,6 +45,11 @@ export default new Router({
       path: '/LessonOne',
       name: 'LessonOne',
       component: LessonOne
+    },
+    {
+      path: '/Variables',
+      name: 'Variables',
+      component: Variables
     }
   ]
 })
