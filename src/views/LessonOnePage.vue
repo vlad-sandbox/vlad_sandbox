@@ -1,6 +1,8 @@
 <template>
 <div class="wrap">
-    <div class="clear"></div>
+    <div class="clear">
+        <button class="blackthemebutton" @click="blackthemefunc()"></button>
+    </div>
     <div class="center">
         <app-center :messages = "message"></app-center>
         <app-sender @pushmessage="getmessage" propsside="left-side" @getLastMessage="lastmessagestext ()" :lastmesaga="lastmessage"></app-sender>
@@ -39,6 +41,9 @@ export default {
     lastmessagestext () {
       let last = this.message.length - 1
       this.lastmessage = this.message[last].text
+    },
+    blackthemefunc () {
+      this.blacktheme = "true"
     }
   },
   components: {
