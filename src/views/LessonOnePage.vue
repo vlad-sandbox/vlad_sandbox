@@ -1,8 +1,10 @@
 <template>
 <div class="wrap">
     <div class="clear">
-        <button class="blackthembutton" @click="blackthemfunc()">black</button>
-        <div class="buttonthem"><div class="buttonstick" @click="allcolorfunc()"></div></div>
+        <div class="buttonthem">
+          <div class="buttonstick" @click="allcolorfunc()">
+          </div>
+        </div>
     </div>
     <div class="center">
         <app-center :messages = "message"></app-center>
@@ -10,7 +12,15 @@
         <!--<app-sender @pushmessage="getmessage" propsside="right-side"></app-sender>-->
     </div>
     <div class="clear">
-        <button class="whitethembutton" @click="whitethemfunc()">white</button>
+      <!-- Switch -->
+  <div class="switch">
+    <label>
+      Off
+      <input type="checkbox">
+      <span class="lever"></span>
+      On
+    </label>
+  </div>
   </div>
 </div>
 
@@ -27,7 +37,7 @@ export default {
       lastmessage: '',
       blackthemflag: false,
       whitethemflag: false,
-      colorflag: false,
+      colorflag: false
     }
   },
   methods: {
@@ -58,13 +68,12 @@ export default {
     },
     allcolorfunc () {
       if (this.colorflag === true) {
-        this.colorflag = !this.colorflag
-        this.$emit('setwhitetheme', this.colorflag)
-        console.log(this.colorflag)
+        this.colorflag = false
+        this.$emit('colortheme', this.colorflag)
+      } else {
+        this.colorflag = true
+        this.$emit('colortheme', this.colorflag)
       }
-      this.colorflag = true
-      this.$emit('setwhitetheme', this.colorflag)
-      console.log(this.colorflag)
     }
   },
   components: {

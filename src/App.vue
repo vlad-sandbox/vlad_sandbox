@@ -1,17 +1,18 @@
 <template>
-  <div id="app" :class="[{'blackthemapp': blackflag}, {'whitethemapp': whiteflag} ]">
+ <!-- <div id="app" :class="[{'blackthemapp': blackflag}, {'whitethemapp': whiteflag}]"> -->
+<div id="app" :class="{'colorchangeapp': usingcolorflag}">
     <!-- <div :class="['wrapper', {'grey': greyFlag}, {'green': greenFlag}]"> -->
-    <div id="nav">
+    <div id="nav" :class="{'colorchangenav': usingcolorflag}">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/table">Table</router-link> |
       <router-link to="/flexbox">FlexBox</router-link> |
       <router-link to="/draggable">DraggableBox</router-link> |
       <router-link to="/base">Base</router-link> |
-      <router-link to="/LessonOne">VL Chat</router-link> | 
+      <router-link to="/LessonOne">VL Chat</router-link> |
       <router-link to="/Variables">Variables</router-link>
     </div>
-    <router-view @setblacktheme="appendblackthem" @setwhitetheme="appendwhitethem"></router-view>
+    <router-view @setblacktheme="appendblackthem" @setwhitetheme="appendwhitethem" @colortheme = "appendcolortheme"></router-view>
   </div>
 </template>
 <script>
@@ -19,29 +20,22 @@ export default {
   data () {
     return {
       blackflag: false,
-      whiteflag: false
+      whiteflag: false,
+      usingcolorflag: false
     }
   },
   methods: {
-    appendblackthem (blackthemflag) {
-      this.blackflag = blackthemflag
-      this.whiteflag = false
-    },
-    appendwhitethem (whitethemflag) {
-      this.whiteflag = whitethemflag
-      this.blackflag = false
+    appendcolortheme (colorflag) {
+      this.usingcolorflag = colorflag
+      console.log(this.usingcolorflag)
     }
   }
 }
 </script>
 <style lang="stylus">
-.blackthemapp
-  background-color black
-  transition all .5s
-  //transform: scale(0.1,0.2)
-.whitethemapp
-  background-color white
-  transition all .5s
+@font-face 
+    font-family: Navigation; /* Имя шрифта */
+    src: url(assets/fonts/Navigation.TTF); /* Путь к файлу со шрифтом */
 body
   margin 0
   padding 0
@@ -59,7 +53,6 @@ body
   height 100%
   display flex
   flex-direction column
-
 #nav
   padding 30px
   a
@@ -67,4 +60,16 @@ body
     color #2c3e50
     &.router-link-exact-active
       color #42b983
+.colorchangeapp
+  background-color black
+  transition all .5s
+  //transform: scale(0.1,0.2)
+.colorchangenav
+  padding 30px
+  a
+    font-weight normal
+    font-family Navigation !important
+    color white !important
+  &.router-link-exact-active
+    color white
 </style>
