@@ -2,6 +2,7 @@
 <div class="wrap">
     <div class="clear">
         <button class="blackthembutton" @click="blackthemfunc()">black</button>
+        <div class="buttonthem"><div class="buttonstick" @click="allcolorfunc()"></div></div>
     </div>
     <div class="center">
         <app-center :messages = "message"></app-center>
@@ -25,7 +26,8 @@ export default {
       message: [],
       lastmessage: '',
       blackthemflag: false,
-      whitethemflag: false
+      whitethemflag: false,
+      colorflag: false,
     }
   },
   methods: {
@@ -53,6 +55,16 @@ export default {
     whitethemfunc () {
       this.whitethemflag = true
       this.$emit('setwhitetheme', this.whitethemflag)
+    },
+    allcolorfunc () {
+      if (this.colorflag === true) {
+        this.colorflag = !this.colorflag
+        this.$emit('setwhitetheme', this.colorflag)
+        console.log(this.colorflag)
+      }
+      this.colorflag = true
+      this.$emit('setwhitetheme', this.colorflag)
+      console.log(this.colorflag)
     }
   },
   components: {
@@ -61,6 +73,7 @@ export default {
   }
 }
 </script>
+
 <style>
   .wrap {
     display: flex;
@@ -78,5 +91,18 @@ export default {
   }
   .clear {
     flex-grow: 1;
+  }
+  .buttonthem {
+    border: 4px outset;
+    border-color:aquamarine;
+    width: 30px;
+    height: 30px;
+  }
+  .buttonstick {
+    border: 4px outset;
+    border-color:brown;
+    width: 10px;
+    height: 23px;
+    float: right;
   }
 </style>

@@ -38,7 +38,7 @@ export default {
 .blackthemapp
   background-color black
   transition all .5s
-  transform: scale(0.1,0.2)
+  //transform: scale(0.1,0.2)
 .whitethemapp
   background-color white
   transition all .5s
