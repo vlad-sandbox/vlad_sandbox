@@ -1,8 +1,8 @@
 <template>
 <div class="wrap">
     <div class="clear">
-        <div class="buttonthem">
-          <div class="buttonstick" @click="allcolorfunc()">
+        <div class="buttonthemoff" :class="{'buttonthemon': colorflag}">
+          <div class="buttonstickoff" @click="allcolorfunc()" :class="{'buttonstickon': colorflag}">
           </div>
         </div>
     </div>
@@ -91,17 +91,39 @@ export default {
   .clear {
     flex-grow: 1;
   }
-  .buttonthem {
-    border: 4px outset;
-    border-color:aquamarine;
-    width: 30px;
-    height: 30px;
-  }
-  .buttonstick {
-    border: 4px outset;
-    border-color:brown;
-    width: 10px;
-    height: 23px;
+  .buttonthemoff {
+    width: 36px;
+    height: 14px;
+    border-radius: 15px;
     float: right;
+    background-color: rgba(0, 0, 0, 0.38);
+    margin-right: 5px;
+  }
+  .buttonstickoff {
+    width: 20px;
+    height: 20px;
+    float: right;
+    border-radius: 20px;
+    margin-top: -3px;
+    margin-right: -2px;
+    background-color: rgb(59, 68, 81);
+    transition: all .9s
+  }
+  .buttonthemon {
+    width: 36px;
+    height: 14px;
+    border-radius: 15px;
+    float: right;
+    background-color:aqua;
+    margin-right: 5px;
+  }
+  .buttonstickon {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    margin-top: -3px;
+    margin-right: 18px;
+    background-color: red;
+    transition: all .9s;
   }
 </style>
