@@ -30,6 +30,7 @@ export default {
   }
 }
 </script>
+//background-color rgb(14, 22, 33)
 <style scoped="true" lang="stylus">
   .edited
     color red
@@ -50,6 +51,8 @@ export default {
 </style>
 <style lang="stylus">
   .message-container
+    background-color rgb(14, 22, 33)
+    border-radius 20px
     display flex
     flex-direction column
     flex-grow 1

@@ -31,8 +31,8 @@ export default {
 </script>
 <style lang="stylus">
 @font-face
-    font-family: Navigation; /* Имя шрифта */
-    src: url(assets/fonts/Navigation.TTF); /* Путь к файлу со шрифтом */
+    font-family: Roboto-light; /* Имя шрифта */
+    src: url(/assets/fonts/Roboto-Light.TTF); /* Путь к файлу со шрифтом */
 body
   margin 0
   padding 0
@@ -58,16 +58,17 @@ body
     &.router-link-exact-active
       color #42b983
 .colorchangeapp
-  background-color black
+  background-color rgb(23, 33, 43)
   transition all .5s
   //transform: scale(0.1,0.2)
 .colorchangenav
   padding 30px
   a
     font-weight normal
-    font-family Navigation !important
+    font-family Roboto-light !important
     color white !important
     transition all .5s !important
+    text-decoration none
   &.router-link-exact-active
     color white
 </style>
