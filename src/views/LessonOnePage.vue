@@ -35,8 +35,6 @@ export default {
     return {
       message: [],
       lastmessage: '',
-      blackthemflag: false,
-      whitethemflag: false,
       colorflag: false
     }
   },
@@ -57,14 +55,6 @@ export default {
     lastmessagestext () {
       let last = this.message.length - 1
       this.lastmessage = this.message[last].text
-    },
-    blackthemfunc () {
-      this.blackthemflag = true
-      this.$emit('setblacktheme', this.blackthemflag)
-    },
-    whitethemfunc () {
-      this.whitethemflag = true
-      this.$emit('setwhitetheme', this.whitethemflag)
     },
     allcolorfunc () {
       if (this.colorflag === true) {

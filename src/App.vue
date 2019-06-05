@@ -12,28 +12,25 @@
       <router-link to="/LessonOne">VL Chat</router-link> |
       <router-link to="/Variables">Variables</router-link>
     </div>
-    <router-view @setblacktheme="appendblackthem" @setwhitetheme="appendwhitethem" @colortheme = "appendcolortheme"></router-view>
+    <router-view @colortheme = "appendcolortheme"></router-view>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      blackflag: false,
-      whiteflag: false,
       usingcolorflag: false
     }
   },
   methods: {
     appendcolortheme (colorflag) {
       this.usingcolorflag = colorflag
-      console.log(this.usingcolorflag)
     }
   }
 }
 </script>
 <style lang="stylus">
-@font-face 
+@font-face
     font-family: Navigation; /* Имя шрифта */
     src: url(assets/fonts/Navigation.TTF); /* Путь к файлу со шрифтом */
 body
@@ -70,6 +67,7 @@ body
     font-weight normal
     font-family Navigation !important
     color white !important
+    transition all .5s !important
   &.router-link-exact-active
     color white
 </style>
