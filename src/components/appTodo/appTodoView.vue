@@ -1,11 +1,14 @@
 <template>
-    <app-task-list :data="data"></app-task-list>
+<div>
+    <app-task-list :data="data" @click.native="toggleCreateTask()"></app-task-list>
+    <app-task-manager @create="pushTask" v-if="createNewTask"></app-task-manager>
 </div>
 
 </template>
 
 <script>
 import appTaskList from './todoComponents/appTaskList'
+import appTaskManager from './todoComponents/appTaskManager'
 const dateNow = () => new Date()
 const datePlan = () => {
   let date = new Date()
@@ -29,6 +32,13 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'close',
         'description': 'Описание второй задачи'
+      },
+      {
+        'name': 'Третья задача',
+        'date_start': dateNow(),
+        'date_planning': datePlan(),
+        'status': 'close',
+        'description': 'Описание третьей задачи'
       }
     ]
   },
@@ -75,16 +85,25 @@ export default {
   name: 'todo',
   data () {
     return {
-      data: dataItems
+      data: dataItems,
+      createNewTask: false
     }
   },
   created () {
     console.log(this.data)
   },
   methods: {
+    pushTask (newTask) {
+      console.log(newTask)
+    },
+    toggleCreateTask () {
+      this.createNewTask = !this.createNewTask
+      console.log(this.createNewTask)
+    }
   },
   components: {
-    appTaskList
+    appTaskList,
+    appTaskManager
   }
 }
 </script>
