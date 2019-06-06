@@ -7,6 +7,8 @@ import FlexBox from './views/FlexBox.vue'
 import DraggableBoxes from './views/DraggableBoxes.vue'
 import LessonOne from './views/LessonOnePage.vue'
 import Variables from './views/Variables.vue'
+import Todo from './components/appTodo/appTodoView.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -50,6 +52,11 @@ export default new Router({
       path: '/Variables',
       name: 'Variables',
       component: Variables
+    },
+    {
+      path: '/Todo',
+      name: 'Todo',
+      component: Todo
     }
   ]
 })
