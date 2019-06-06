@@ -11,7 +11,7 @@
 import appTask from './appTask'
 export default {
   name: 'app-task-list',
-  props: ['date'],
+  props: ['data'],
   data () {
     return {
     }
