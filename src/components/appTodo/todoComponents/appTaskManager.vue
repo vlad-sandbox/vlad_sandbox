@@ -16,11 +16,19 @@ const taskClear = {
   time: new Date().getTime(),
   date_start: new Date()
 }
+
 export default {
   name: 'app-task-manager',
   data () {
     return {
-      taskData: taskClear
+      taskData: {
+        name: '',
+        description: '',
+        status: 'open',
+        date_planning: new Date(),
+        time: new Date().getTime(),
+        date_start: new Date()
+      }
     }
   },
   watch: {

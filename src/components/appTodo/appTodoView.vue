@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="screen_wrapper">
     <app-task-list :data="data" @click.native="toggleCreateTask()"></app-task-list>
     <app-task-manager @create="pushTask" v-if="createNewTask"></app-task-manager>
 </div>
@@ -95,6 +95,7 @@ export default {
   methods: {
     pushTask (newTask) {
       console.log(newTask)
+      this.toggleCreateTask()
     },
     toggleCreateTask () {
       this.createNewTask = !this.createNewTask
@@ -108,5 +109,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus" scoped>
+.screen_wrapper
+  height 100%
+  overflow hidden
 </style>
