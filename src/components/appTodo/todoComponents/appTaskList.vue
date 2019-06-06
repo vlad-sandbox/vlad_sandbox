@@ -1,13 +1,17 @@
 <template>
-  <div v-for="(item) in data">
-    <div v-for="(tasks) in task">    
+<div>
+  <div v-for="item in data">
+    <p>{{item.date}}</p>
+  <app-task v-for="task in item.tasks" :task="task">
+  </app-task>
+  </div>
 </div>
 </template>
 <script>
-import appTaskList from './todoComponents/appTask'
+import appTask from './appTask'
 export default {
   name: 'app-task-list',
-  props: ['task'],
+  props: ['date'],
   data () {
     return {
     }
@@ -15,6 +19,9 @@ export default {
   watch: {
   },
   methods: {
+  },
+  components: {
+    appTask
   }
 }
 </script>
