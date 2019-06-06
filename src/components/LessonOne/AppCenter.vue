@@ -1,8 +1,8 @@
 <template>
 <div class="message-container" ref="messageContainer">
-  <div class="wrapperP">
-    <p v-for="(message, i) in messages" :key="i" :class="[message.side, {active: message.changed}]">
-      <span :style="{'color': message.colorname}">{{message.username}}</span>:{{message.text}}
+  <div :class="message.side" v-for="(message, i) in messages" :key="i" class="wrapperP">
+    <p :class="{active: message.changed}">
+      <span :style="{'color': message.colorname}">{{message.username}}</span>:{{message.text}}<br><span v-if="message.changed" class="edited">edited</span>
     </p>
   </div>
 </div>
@@ -25,27 +25,39 @@ export default {
       // При изменении массива я программно прокручиваю "контейнер для сообщений" в самый конец
       // Чтобы были видны новые сообщения сразу, а не пришлось прокручивать пользователю
       // На формат записи не смотри, я потом покажу тебе сокращенные стрелочные функции
-      setTimeout ( _ => el.scrollTop = el.scrollHeight, 50)
+      setTimeout(_ => { el.scrollTop = el.scrollHeight }, 50)
     }
   }
 }
 </script>
+//background-color rgb(14, 22, 33)
 <style scoped="true" lang="stylus">
-  .wrapperP
+  .edited
     color red
+    font-style italic
+    text-align right
+    float right
+  .wrapperP
+    display flex
   p
-    background-color blue
     line-height 1
+    margin 3px
+    padding: 10px
+    border: 4px outset
+    border-radius: 10px
+    background-color #E2FFC7
   &.active
-    background-color grey
+    background-color #dfdbdd
 </style>
 <style lang="stylus">
   .message-container
-    //display flex
+    background-color rgb(14, 22, 33)
+    border-radius 20px
+    display flex
     flex-direction column
     flex-grow 1
     padding 10px
-    //overflow-y auto
+    overflow-y auto
     scroll-behavior smooth
   .left-side
     float left
