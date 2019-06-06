@@ -43,7 +43,6 @@ export default {
     line-height 1
     margin 3px
     padding: 10px
-    border: 4px outset
     border-radius: 10px
     background-color #E2FFC7
   &.active

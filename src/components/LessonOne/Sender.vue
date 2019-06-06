@@ -7,7 +7,7 @@
       <!--Вывод логина-->
     <p ref="username" v-if = "login">{{login}} </p>
       <!--Поле ввода сообщения-->
-    <input class="message_input" autofocus placeholder="Введите текст" v-model="text" @change="sendmessage($event.target)" v-if = "login" @keyup.up = "showlastmessages()">
+    <input class="message_input" autofocus placeholder="Введите текст" v-model="text" @change="sendmessage($event.target)" v-if = "login" @keyup.up = "showlastmessages()" wrap="soft">
       <!--Кнопка отправки сообщения-->
     <button class="send" @click="sendmessage()" v-if = "login">Send</button>
       <!--Поле выбора цвета логина-->
