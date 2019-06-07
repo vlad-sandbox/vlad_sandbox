@@ -7,8 +7,6 @@
          @drop="setDrop($event, $event.target, {items, item, i, target})"
          @dragend="setDragEnd($event, $event.target, {items, item, i, target})"
          @dragenter="setDragEnter($event, $event.target, {items, item, i, target})">
-         <span>{{item.visible ? 'Visible': 'Hidden'}}</span>
-         <span>{{item.pinned ? 'Pinned': 'Unpinned'}}</span>
          {{item.name}}
          <drag-drop @moved="() => $emit('moved')" :data="item.items" :target="'child_' + item.name" v-if="item.items"/>
      </div>
