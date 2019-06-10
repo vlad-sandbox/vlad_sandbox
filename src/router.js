@@ -8,6 +8,7 @@ import DraggableBoxes from './views/DraggableBoxes.vue'
 import LessonOne from './views/LessonOnePage.vue'
 import Variables from './views/Variables.vue'
 import Todo from './components/appTodo/appTodoView.vue'
+import Testflex from './views/Testflex.vue'
 
 Vue.use(Router)
 
@@ -57,6 +58,11 @@ export default new Router({
       path: '/Todo',
       name: 'Todo',
       component: Todo
+    },
+    {
+      path: '/Testflex',
+      name: 'Testflex',
+      component: Testflex
     }
   ]
 })
