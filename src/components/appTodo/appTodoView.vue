@@ -113,4 +113,21 @@ export default {
 .screen_wrapper
   height 100%
   overflow hidden
+  position relative
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 0
+    height 10px
+    background linear-gradient(to bottom, #eaeaea, #eaeaea00)
+    width 100%
+  &:before
+    content ''
+    position absolute
+    bottom 0
+    left 0
+    height 10px
+    background linear-gradient(to top, #eaeaea, #eaeaea00)
+    width 100%
 </style>
