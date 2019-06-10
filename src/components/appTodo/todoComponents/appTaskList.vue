@@ -1,9 +1,9 @@
 <template>
 <div class="wrapper_list">
-  <div v-for="item in data" class="child">
+  <div v-for="item in data" class="child" :key="item.date">
     <h3 class="label">{{item.date}}</h3>
     <div class="wrapper_tasks">
-      <app-task v-for="task in item.tasks" :task="task"></app-task>
+      <app-task v-for="(task, i) in item.tasks" :task="task" :key="'task' + i"></app-task>
     </div>
   </div>
 </div>
@@ -30,7 +30,6 @@ export default {
 .wrapper_list, .wrapper_tasks
   display flex
   flex-direction column
-  justify-content center
 
 .wrapper_list
   overflow-y auto
@@ -39,6 +38,7 @@ export default {
   margin 0 auto
   padding 10px
   border-radius 10px
+  scroll-behavior smooth
   .child
     .wrapper_tasks
       border-radius 10px 0px 0px 10px

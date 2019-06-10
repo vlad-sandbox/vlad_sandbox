@@ -90,7 +90,23 @@ export default {
     }
   },
   created () {
-    console.log(this.data)
+    console.log('Данные из переменной this.data:', this.data)
+    // Задали имя, под которым будем сохранять запись в localStorage
+    let name = 'main_data'
+    // Сохранили запись в localStorage
+    this.lsSet(name, this.data)
+    // В переменную oldData получили данные ИЗ localStorage и вывели ее в консоль
+    let oldData = this.lsGet(name)
+    console.log('Данные из локального хранилища:', oldData)
+    // Удалила из localStorage запись, сохраненную под именем name
+    this.lsRem(name)
+    // Другие варианты:
+    // this.lsSet('любое_другое_имя', this.любая_другая_переменная)
+    // this.lsGet('любое_другое_имя')
+    // this.lsRem('любое_другое_имя')
+    //
+    // Установка РЕАКТИВНОЙ зависимости для переменной
+    // this.$set(this, 'имя глобальной переменной', this.lsGet(name))
   },
   methods: {
     pushTask (newTask) {
@@ -100,6 +116,22 @@ export default {
     toggleCreateTask () {
       this.createNewTask = !this.createNewTask
       console.log(this.createNewTask)
+    },
+    // Метод ПОЛУЧЕНИЯ данных из локального хранилища.
+    // Name - имя, под которым сохранены данные в localStorage
+    lsGet (name) {
+      return JSON.parse(localStorage.getItem(name))
+    },
+    // Метод ЗАПИСИ данных в локальное хранилище.
+    // Name - имя, под которым БУДУТ сохранены данные в localStorage
+    // Data - данные, которые будут созранены в localStorage
+    lsSet (name, data) {
+      return localStorage.setItem(name, JSON.stringify(data))
+    },
+    // Метод УДАЛЕНИЯ записи из локального хранилища.
+    // Name - имя, под которым хранится удаляемая записи в localStorage
+    lsRem (name) {
+      return localStorage.removeItem(name)
     }
   },
   components: {
@@ -113,4 +145,21 @@ export default {
 .screen_wrapper
   height 100%
   overflow hidden
+  position relative
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 0
+    height 10px
+    background linear-gradient(to bottom, #eaeaea, #eaeaea00)
+    width 100%
+  &:before
+    content ''
+    position absolute
+    bottom 0
+    left 0
+    height 10px
+    background linear-gradient(to top, #eaeaea, #eaeaea00)
+    width 100%
 </style>
