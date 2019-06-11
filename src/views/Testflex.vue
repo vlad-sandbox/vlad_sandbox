@@ -1,17 +1,46 @@
 <template>
   <div class="testwrapflex">
-    <div class="bodyflex">
-      <div class="clearflex">clear</div>
-      <div class="centerflex">
-        <div class="wrapmondey"><p>mondey</p></div>
-        <div class="wraptuesday"><p>tuesday</p></div>
-        <div class="wrapwednesday"><p>wednesday</p></div>
-        <div class="wrapthursday"><p>thursday</p></div>
-        <div class="wrapfriday"><p>friday</p></div>
-        <div class="wrapsaturday"><p>saturday</p></div>
-        <div class="wrapsunday"><p>sunday</p></div>
+    <div class="wrapperbody">
+    <div class="clear"></div>
+    <div class="centerflex">
+      <div class="week">
+        <div class="day"><p>1</p></div>
+        <div class="day"><p>2</p></div>
+        <div class="day"><p>3</p></div>
+        <div class="day"><p>4</p></div>
+        <div class="day"><p>5</p></div>
+        <div class="day"><p>6</p></div>
+        <div class="day"><p>7</p></div>
       </div>
-      <div class="clearflex">clear</div>
+      <div class="week">
+        <div class="day"><p>8</p></div>
+        <div class="day"><p>9</p></div>
+        <div class="day"><p>10</p></div>
+        <div class="day"><p>11</p></div>
+        <div class="day"><p>12</p></div>
+        <div class="day"><p>13</p></div>
+        <div class="day"><p>14</p></div>
+      </div>
+      <div class="week">
+        <div class="day"><p>15</p></div>
+        <div class="day"><p>16</p></div>
+        <div class="day"><p>17</p></div>
+        <div class="day"><p>18</p></div>
+        <div class="day"><p>19</p></div>
+        <div class="day"><p>20</p></div>
+        <div class="day"><p>21</p></div>
+      </div>
+      <div class="week">
+        <div class="day"><p>22</p></div>
+        <div class="day"><p>23</p></div>
+        <div class="day"><p>24</p></div>
+        <div class="day"><p>25</p></div>
+        <div class="day"><p>26</p></div>
+        <div class="day"><p>27</p></div>
+        <div class="day"><p>28</p></div>
+      </div>
+    </div>
+    <div class="clear"></div>
     </div>
     <div class="footerflex">footer</div>
   </div>
@@ -19,47 +48,31 @@
 <script>
 </script>
 <style scoped="true" lang="stylus">
-  .bodyflex
+  .testwrapflex
     display flex
-    height 100px
-    flex-wrap wrap
-    justify-content space-evenly
-  .clearflex
-    background-color red
-    flex-grow 1
+    flex-direction column
+    height: 100%
+  .wrapperbody
+    display flex
+    flex-direction row
+    justify-content space-between
+    height: 100%
   .centerflex
     display flex
-    background-color blue
-    flex-grow 1.5
-    flex-wrap wrap
-    justify-content space-evenly
+    flex-direction column
+    flex-grow 1
   .footerflex
     background-color green
-    flex-grow 1
-  .wrapmondey
+//Блоки с неделями
+  .week
+    display flex
+    flex-direction column
+    justify-content space-between
+    flex-wrap wrap
+// Блоки с днями
+  .day
     background-color yellow
-    flex-grow 1
-  .wraptuesday
-    background-color pink
-    flex-grow 1
-  .wrapwednesday
-    background-color brown
-    flex-grow 1
-  .wrapthursday
-    background-color black
-    flex-grow 1
-  .wrapfriday
-    background-color white
-    flex-grow 1
-  .wrapsaturday
-    background-color orange
-    flex-grow 1
-  .wrapsunday
-    background-color grey
-    flex-grow 1
+    width 20px
   p
     color green
-    float right
-    margin-top 0px
-    margin-right 2px
 </style>
