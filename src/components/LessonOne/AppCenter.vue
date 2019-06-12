@@ -30,7 +30,6 @@ export default {
   }
 }
 </script>
-//background-color rgb(14, 22, 33)
 <style scoped="true" lang="stylus">
   .edited
     color red
