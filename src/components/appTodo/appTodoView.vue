@@ -1,7 +1,13 @@
 <template>
 <div class="screen_wrapper">
-    <app-task-list :data="data" @click.native="toggleCreateTask()"></app-task-list>
-    <app-task-manager @create="pushTask" v-if="createNewTask"></app-task-manager>
+    <md-button class="md-fab md-primary md-fab-bottom-right" @click.native="toggleCreateTask()">
+      <md-icon>add</md-icon>
+    </md-button>
+    <app-task-list :data="data"></app-task-list>
+    <md-dialog :md-active.sync="createNewTask">
+      <md-dialog-title>Новая задача</md-dialog-title>
+      <app-task-manager @create="pushTask"></app-task-manager>
+    </md-dialog>
 </div>
 
 </template>
