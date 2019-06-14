@@ -96,7 +96,7 @@
         background-color #eab558
         cursor pointer
         transition all .5s
-      
+
   .testwrapflex
     display flex
     flex-direction column
@@ -144,7 +144,7 @@
     font-size 25px
     // Убрал абсолютное позиционирование, в нем нет необходимости
     // position absolute
-  // Соотв-но это тоже не актуально  
+  // Соотв-но это тоже не актуально
   .img
     opacity 0.5
     width 100px

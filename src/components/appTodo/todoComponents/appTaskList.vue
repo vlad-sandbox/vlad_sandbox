@@ -30,6 +30,10 @@ export default {
 .wrapper_list, .wrapper_tasks
   display flex
   flex-direction column
+// Для телефонов
+@media (orientation: portrait)
+  .wrapper_list
+    width 100% !important
 
 .wrapper_list
   overflow-y auto
