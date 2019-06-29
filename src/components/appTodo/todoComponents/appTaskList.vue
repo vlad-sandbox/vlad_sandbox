@@ -3,7 +3,9 @@
   <div v-for="item in data" class="child" :key="item.date">
     <h3 class="label">{{item.date}}</h3>
     <div class="wrapper_tasks">
-      <app-task v-for="(task, i) in item.tasks" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
+      <template v-for="(task, i) in item.tasks">
+        <app-task v-if="task.visible" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
+      </template>
     </div>
   </div>
 </div>

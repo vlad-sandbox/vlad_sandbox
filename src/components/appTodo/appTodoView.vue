@@ -4,7 +4,7 @@
       <md-icon>add</md-icon>
     </md-button>
     <button class="bottomsearch" @click="flagSerchBottom"><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
-    <input class="inputsearch" v-if = "flagSerch">
+    <input class="inputsearch" v-if="flagSerch" @input="serchinput" v-model="serchtext">
     <app-task-list :data="data" @pushclose = "runclosetasks"></app-task-list>
     <md-dialog :md-active.sync="createNewTask">
       <md-dialog-title>Новая задача</md-dialog-title>
@@ -33,7 +33,8 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'close',
         'description': 'Описание первой задачи',
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       },
       {
         'name': 'Вторая задача',
@@ -41,7 +42,8 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'close',
         'description': 'Описание второй задачи',
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       },
       {
         'name': 'Третья задача',
@@ -49,7 +51,8 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'close',
         'description': 'Описание третьей задачи',
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       }
     ]
   },
@@ -62,7 +65,8 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'close',
         'description': 'Описание первой задачи',
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       },
       {
         'name': 'Вторая задача',
@@ -70,7 +74,8 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'open',
         'description': 'Описание второй задачи',
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       }
     ]
   },
@@ -83,7 +88,8 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'open',
         'description': 'Описание первой задачи',
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       },
       {
         'name': 'Вторая задача',
@@ -91,7 +97,8 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'open',
         'description': 'Описание второй задачи',
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       }
     ]
   }
@@ -102,7 +109,8 @@ export default {
     return {
       data: dataItems,
       createNewTask: false,
-      flagSerch: false
+      flagSerch: false,
+      serchtext: ''
     }
   },
   created () {
@@ -166,6 +174,13 @@ export default {
     },
     flagSerchBottom () {
       this.flagSerch = !this.flagSerch
+    },
+    serchinput (serchtext) {
+      this.data.forEach(item => {
+        item.tasks.forEach(items => {
+          items.visible = items.name.toLowerCase().startsWith(this.serchtext.toLowerCase())
+        })
+      })
     }
   },
   components: {
