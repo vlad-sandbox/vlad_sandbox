@@ -23,7 +23,7 @@ const datePlan = () => {
 }
 const dataItems = [
   {
-    'date': '19.06.04',
+    'date': '2019.06.04',
     'tasks': [
       {
         'name': 'Первая задача',
@@ -49,7 +49,7 @@ const dataItems = [
     ]
   },
   {
-    'date': '19.06.05',
+    'date': '2019.06.05',
     'tasks': [
       {
         'name': 'Первая задача',
@@ -68,7 +68,7 @@ const dataItems = [
     ]
   },
   {
-    'date': '19.06.06',
+    'date': '2019.06.06',
     'tasks': [
       {
         'name': 'Первая задача',
@@ -116,7 +116,8 @@ export default {
   },
   methods: {
     pushTask (newTask) {
-      console.log(newTask)
+      let dateNow = new Date().toISOString().split('T')[0].replace(/-/g, '.')
+      console.log(dateNow)
       this.toggleCreateTask()
     },
     toggleCreateTask () {
