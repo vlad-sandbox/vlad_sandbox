@@ -4,7 +4,7 @@
       <md-icon>add</md-icon>
     </md-button>
     <button class="bottomsearch" @click="flagSerchBottom"><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
-    <input class="inputsearch" v-if = "flagSerch">
+    <input class="inputsearch" v-if="flagSerch" @input="serchinput" v-model="serchtext">
     <app-task-list :data="data" @pushclose = "runclosetasks"></app-task-list>
     <md-dialog :md-active.sync="createNewTask">
       <md-dialog-title>Новая задача</md-dialog-title>
@@ -34,7 +34,8 @@ const dataItems = [
         'status': 'close',
         'description': 'Описание первой задачи',
         'tags': [],
-        'fullmode': false
+        'fullmode': false,
+        'visible': true
       },
       {
         'name': 'Вторая задача',
@@ -44,6 +45,7 @@ const dataItems = [
         'description': 'Описание второй задачи',
         'tags': [],
         'fullmode': false
+        'visible': true
       },
       {
         'name': 'Третья задача',
@@ -51,6 +53,7 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'close',
         'description': 'Описание третьей задачи',
+        'visible': true
         'tags': [],
         'fullmode': false
       }
@@ -67,6 +70,7 @@ const dataItems = [
         'description': 'Описание первой задачи',
         'tags': [],
         'fullmode': false
+        'visible': true
       },
       {
         'name': 'Вторая задача',
@@ -76,6 +80,7 @@ const dataItems = [
         'description': 'Описание второй задачи',
         'tags': [],
         'fullmode': false
+        'visible': true
       }
     ]
   },
@@ -90,6 +95,7 @@ const dataItems = [
         'description': 'Описание первой задачи',
         'tags': [],
         'fullmode': false
+        'visible': true
       },
       {
         'name': 'Вторая задача',
@@ -99,6 +105,7 @@ const dataItems = [
         'description': 'Описание второй задачи',
         'tags': [],
         'fullmode': false
+        'visible': true
       }
     ]
   }
@@ -109,7 +116,8 @@ export default {
     return {
       data: dataItems,
       createNewTask: false,
-      flagSerch: false
+      flagSerch: false,
+      serchtext: ''
     }
   },
   created () {
@@ -173,6 +181,13 @@ export default {
     },
     flagSerchBottom () {
       this.flagSerch = !this.flagSerch
+    },
+    serchinput (serchtext) {
+      this.data.forEach(item => {
+        item.tasks.forEach(items => {
+          items.visible = items.name.toLowerCase().startsWith(this.serchtext.toLowerCase())
+        })
+      })
     }
   },
   components: {
@@ -224,7 +239,7 @@ export default {
   right 50px
   top 23px
   width 300px
-  height 50px
+  height 40px
   border-radius 10px 0px 0px 10px
   border-left 5px solid #00bcd4
 </style>

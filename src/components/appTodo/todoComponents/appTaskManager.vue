@@ -32,7 +32,8 @@ const taskClear = {
   time: new Date().getTime(),
   date_start: new Date(),
   tags: [],
-  fullmode: false
+  fullmode: false,
+  visible: true
 }
 
 export default {
@@ -47,7 +48,8 @@ export default {
         time: new Date().getTime(),
         date_start: new Date(),
         tags: [],
-        fullmode: false
+        fullmode: false,
+        visible: true
       }
     }
   },
