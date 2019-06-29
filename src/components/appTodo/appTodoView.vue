@@ -3,7 +3,9 @@
     <md-button class="md-fab md-primary md-fab-bottom-right" @click.native="toggleCreateTask()">
       <md-icon>add</md-icon>
     </md-button>
-    <app-task-list :data="data"></app-task-list>
+    <button class="bottomsearch" @click="flagSerchBottom"><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
+    <input class="inputsearch" v-if = "flagSerch">
+    <app-task-list :data="data" @pushclose = "runclosetasks"></app-task-list>
     <md-dialog :md-active.sync="createNewTask">
       <md-dialog-title>Новая задача</md-dialog-title>
       <app-task-manager @create="pushTask"></app-task-manager>
@@ -30,21 +32,24 @@ const dataItems = [
         'date_start': dateNow(),
         'date_planning': datePlan(),
         'status': 'close',
-        'description': 'Описание первой задачи'
+        'description': 'Описание первой задачи',
+        'fullmode': false
       },
       {
         'name': 'Вторая задача',
         'date_start': dateNow(),
         'date_planning': datePlan(),
         'status': 'close',
-        'description': 'Описание второй задачи'
+        'description': 'Описание второй задачи',
+        'fullmode': false
       },
       {
         'name': 'Третья задача',
         'date_start': dateNow(),
         'date_planning': datePlan(),
         'status': 'close',
-        'description': 'Описание третьей задачи'
+        'description': 'Описание третьей задачи',
+        'fullmode': false
       }
     ]
   },
@@ -56,14 +61,16 @@ const dataItems = [
         'date_start': dateNow(),
         'date_planning': datePlan(),
         'status': 'close',
-        'description': 'Описание первой задачи'
+        'description': 'Описание первой задачи',
+        'fullmode': false
       },
       {
         'name': 'Вторая задача',
         'date_start': dateNow(),
         'date_planning': datePlan(),
         'status': 'open',
-        'description': 'Описание второй задачи'
+        'description': 'Описание второй задачи',
+        'fullmode': false
       }
     ]
   },
@@ -75,14 +82,16 @@ const dataItems = [
         'date_start': dateNow(),
         'date_planning': datePlan(),
         'status': 'open',
-        'description': 'Описание первой задачи'
+        'description': 'Описание первой задачи',
+        'fullmode': false
       },
       {
         'name': 'Вторая задача',
         'date_start': dateNow(),
         'date_planning': datePlan(),
         'status': 'open',
-        'description': 'Описание второй задачи'
+        'description': 'Описание второй задачи',
+        'fullmode': false
       }
     ]
   }
@@ -92,7 +101,8 @@ export default {
   data () {
     return {
       data: dataItems,
-      createNewTask: false
+      createNewTask: false,
+      flagSerch: false
     }
   },
   created () {
@@ -117,12 +127,19 @@ export default {
   methods: {
     pushTask (newTask) {
       let dateNow = new Date().toISOString().split('T')[0].replace(/-/g, '.')
-      console.log(dateNow)
+      if (dateNow !== this.data[this.data.length - 1].date) {
+        let datetasksNew = {
+          date: dateNow,
+          tasks: [newTask]
+        }
+        this.data.push(datetasksNew)
+      } else {
+        this.data[this.data.length - 1].tasks.push(newTask)
+      }
       this.toggleCreateTask()
     },
     toggleCreateTask () {
       this.createNewTask = !this.createNewTask
-      console.log(this.createNewTask)
     },
     // Метод ПОЛУЧЕНИЯ данных из локального хранилища.
     // Name - имя, под которым сохранены данные в localStorage
@@ -139,6 +156,16 @@ export default {
     // Name - имя, под которым хранится удаляемая записи в localStorage
     lsRem (name) {
       return localStorage.removeItem(name)
+    },
+    runclosetasks (fullmode) {
+      this.data.forEach(item => {
+        item.tasks.forEach(items => {
+          items.fullmode = false
+        })
+      })
+    },
+    flagSerchBottom () {
+      this.flagSerch = !this.flagSerch
     }
   },
   components: {
@@ -169,4 +196,28 @@ export default {
     height 10px
     background linear-gradient(to top, #eaeaea, #eaeaea00)
     width 100%
+.bottomsearch
+  position absolute
+  right 100px
+  bottom 30px
+  width 55px
+  height 55px
+  border-radius 50%
+  background-color #448aff
+  border 0px
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  &:hover
+    cursor pointer
+  &:active
+    cursor pointer
+    box-shadow: 0 15px 20px rgba(0,0,0,0.3);
+    transition all .5s
+.inputsearch
+  position absolute
+  right 50px
+  top 23px
+  width 300px
+  height 50px
+  border-radius 10px 0px 0px 10px
+  border-left 5px solid #00bcd4
 </style>

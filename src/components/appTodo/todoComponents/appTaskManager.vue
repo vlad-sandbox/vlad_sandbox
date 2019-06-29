@@ -31,7 +31,8 @@ const taskClear = {
   date_planning: new Date(),
   time: new Date().getTime(),
   date_start: new Date(),
-  tags: []
+  tags: [],
+  fullmode: false
 }
 
 export default {
@@ -45,7 +46,8 @@ export default {
         date_planning: new Date(),
         time: new Date().getTime(),
         date_start: new Date(),
-        tags: []
+        tags: [],
+        fullmode: false
       }
     }
   },

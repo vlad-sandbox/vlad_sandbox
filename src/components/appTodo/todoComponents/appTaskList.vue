@@ -3,7 +3,7 @@
   <div v-for="item in data" class="child" :key="item.date">
     <h3 class="label">{{item.date}}</h3>
     <div class="wrapper_tasks">
-      <app-task v-for="(task, i) in item.tasks" :task="task" :key="'task' + i"></app-task>
+      <app-task v-for="(task, i) in item.tasks" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
     </div>
   </div>
 </div>
@@ -20,6 +20,9 @@ export default {
   watch: {
   },
   methods: {
+    runclosetasks (fullmode) {
+      this.$emit('pushclose', fullmode)
+    }
   },
   components: {
     appTask
