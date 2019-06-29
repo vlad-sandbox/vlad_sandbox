@@ -44,7 +44,7 @@ const dataItems = [
         'status': 'close',
         'description': 'Описание второй задачи',
         'tags': [],
-        'fullmode': false
+        'fullmode': false,
         'visible': true
       },
       {
@@ -53,7 +53,7 @@ const dataItems = [
         'date_planning': datePlan(),
         'status': 'close',
         'description': 'Описание третьей задачи',
-        'visible': true
+        'visible': true,
         'tags': [],
         'fullmode': false
       }
@@ -69,7 +69,7 @@ const dataItems = [
         'status': 'close',
         'description': 'Описание первой задачи',
         'tags': [],
-        'fullmode': false
+        'fullmode': false,
         'visible': true
       },
       {
@@ -79,7 +79,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание второй задачи',
         'tags': [],
-        'fullmode': false
+        'fullmode': false,
         'visible': true
       }
     ]
@@ -94,7 +94,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание первой задачи',
         'tags': [],
-        'fullmode': false
+        'fullmode': false,
         'visible': true
       },
       {
@@ -104,7 +104,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание второй задачи',
         'tags': [],
-        'fullmode': false
+        'fullmode': false,
         'visible': true
       }
     ]
