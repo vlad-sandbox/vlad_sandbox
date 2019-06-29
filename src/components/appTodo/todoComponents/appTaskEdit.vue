@@ -20,7 +20,7 @@
     <md-input v-model="task.date_planning" type="date"></md-input>
   </md-field>
   <md-chips v-model="task.tags" md-placeholder="Tags..."></md-chips>
-  <md-button class="md-primary" @click="closeeditflag">Создать</md-button>
+  <md-button class="md-primary" @click="closeeditflag">Редактировать</md-button>
 </div>
 </template>
 <script>

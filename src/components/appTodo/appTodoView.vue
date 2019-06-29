@@ -232,7 +232,7 @@ export default {
   right 50px
   top 23px
   width 300px
-  height 50px
+  height 40px
   border-radius 10px 0px 0px 10px
   border-left 5px solid #00bcd4
 </style>
