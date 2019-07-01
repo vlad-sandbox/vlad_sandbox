@@ -7,11 +7,25 @@
     <div class="wrapperFullsearch" :class="{'wrapperFullsearchOpen': flagfullsearch}">
       Поиск
       <div class="inputsFullsearch">
-        <button class="buttonFullsearch" @click="metodFullsearch"></button>
-        <div id="input"  contenteditable>1</div>
-        <div id="input"  contenteditable>1</div>
-        <div id="input"  contenteditable>1</div>
-        <div id="input"  contenteditable>1</div>
+        <button class="buttonFullsearch" @click="metodFullsearch" ><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
+        <md-field>
+    <label>Описание</label>
+    <md-input></md-input>
+  </md-field>
+        <input class="inputFullsearch" placeholder="Введите текст">
+        <input class="inputFullsearch" placeholder="Введите текст">
+        <input class="inputFullsearch" placeholder="Введите текст">
+        <div class="wrapperCoreInput">
+          <div class="shell">
+            <div class="core"></div>
+          </div>
+          <p class="textCoreInput">Открыта Закрыта</p>
+          <div class="shell">
+            <div class="core"></div>
+          </div>
+        </div>
+        <input class="inputFullsearch" placeholder="Введите текст">
+        <input class="inputFullsearch" placeholder="Введите текст">
       </div>
     </div>
     <button class="bottomsearch" @click="flagSerchBottom"><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
@@ -258,34 +272,74 @@ export default {
   border-radius 10px 0px 0px 10px
   border-left 5px solid #00bcd4
 .wrapperFullsearch
+  border solid 2px
   display flex
   flex-direction column
   position absolute
-  right -20%
-  background-color red
+  left 100%
+  width 250px
+  min-height 300px
   transition all .5s
-  width 250px
-  min-height 300px
+  top 20px
+  border-right none
+  border-radius 50px 0 0 50px
+  border-color #448aff
 .wrapperFullsearchOpen
-  display flex
-  position absolute
-  right 0%
-  background-color red
-  width 250px
-  min-height 300px
+  transition all .5s
+  margin-left -250px
 .inputsFullsearch
+  flex-direction column
   display flex
   color green
-  justify-content space-between
-  flex-wrap wrap
-#input 
-  width 100px
+  justify-content space-evenly
+  flex-grow 1
+  Align-items center
+.inputFullsearch
+  width 150px
   height 20px
-  border-radius 10px
-  background-color blue
+  border none
+  outline none
+  border-bottom solid 1px red
+  background-color rgba(0,0,0,0)
+  &:hover
+    border-bottom solid 1px blue
 .buttonFullsearch
   position absolute
-  left -30px
-  width 20px
-  height 20px
-</style>
+  left -32px
+  width 30px
+  height 70px
+  border-radius 50px 0 0 50px
+  outline none
+  border none
+  background-color #448aff
+  &:active
+    outline none
+    box-shadow 0 0 10px rgba(0,0,0,0.5)
+    transition all .3s
+.wrapperCoreInput
+  display flex
+  flex-direction row
+  justify-content space-around
+  Align-items center
+.shell
+  display flex
+  flex-direction column
+  justify-content space-evenly
+  Align-items center
+  height 16px
+  width 16px
+  border solid 1px
+  border-radius 50%
+  &:hover
+    background-color green
+.core
+  height 12px
+  width 12px
+  border solid 1px
+  border-radius 50%
+  background-color white
+  &:active
+    background-color red
+.textCoreInput
+  padding 0px 10px 0px 10px
+  </style>
