@@ -3,6 +3,17 @@
     <md-button class="md-fab md-primary md-fab-bottom-right" @click.native="toggleCreateTask()">
       <md-icon>add</md-icon>
     </md-button>
+    <!--              Выезжающее меню с поиском               -->
+    <div class="wrapperFullsearch" :class="{'wrapperFullsearchOpen': flagfullsearch}">
+      Поиск
+      <div class="inputsFullsearch">
+        <button class="buttonFullsearch" @click="metodFullsearch"></button>
+        <div id="input"  contenteditable>1</div>
+        <div id="input"  contenteditable>1</div>
+        <div id="input"  contenteditable>1</div>
+        <div id="input"  contenteditable>1</div>
+      </div>
+    </div>
     <button class="bottomsearch" @click="flagSerchBottom"><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
     <input class="inputsearch" v-if="flagSerch" @input="serchinput" v-model="serchtext">
     <app-task-list :data="data" @pushclose = "runclosetasks"></app-task-list>
@@ -117,7 +128,8 @@ export default {
       data: dataItems,
       createNewTask: false,
       flagSerch: false,
-      serchtext: ''
+      serchtext: '',
+      flagfullsearch: false
     }
   },
   created () {
@@ -188,6 +200,9 @@ export default {
           items.visible = items.name.toLowerCase().startsWith(this.serchtext.toLowerCase())
         })
       })
+    },
+    metodFullsearch () {
+      this.flagfullsearch = !this.flagfullsearch
     }
   },
   components: {
@@ -242,4 +257,35 @@ export default {
   height 40px
   border-radius 10px 0px 0px 10px
   border-left 5px solid #00bcd4
+.wrapperFullsearch
+  display flex
+  flex-direction column
+  position absolute
+  right -20%
+  background-color red
+  transition all .5s
+  width 250px
+  min-height 300px
+.wrapperFullsearchOpen
+  display flex
+  position absolute
+  right 0%
+  background-color red
+  width 250px
+  min-height 300px
+.inputsFullsearch
+  display flex
+  color green
+  justify-content space-between
+  flex-wrap wrap
+#input 
+  width 100px
+  height 20px
+  border-radius 10px
+  background-color blue
+.buttonFullsearch
+  position absolute
+  left -30px
+  width 20px
+  height 20px
 </style>
