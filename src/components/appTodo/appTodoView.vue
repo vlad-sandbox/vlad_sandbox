@@ -6,16 +6,30 @@
     <!--              Выезжающее меню с поиском               -->
     <div class="wrapperFullsearch" :class="{'wrapperFullsearchOpen': flagfullsearch}">
       Поиск
+      <input @input="Fullsearch" v-model="serchtext">
       <div class="inputsFullsearch">
         <button class="buttonFullsearch" @click="metodFullsearch" ><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
         <md-field>
-    <label>Описание</label>
-    <md-input></md-input>
-  </md-field>
-        <input class="inputFullsearch" placeholder="Введите текст">
-        <input class="inputFullsearch" placeholder="Введите текст">
-        <input class="inputFullsearch" placeholder="Введите текст">
-        <div class="wrapperCoreInput">
+          <label>Описание</label>
+          <md-input></md-input>
+        </md-field>
+        <md-field>
+          <label>Описание</label>
+          <md-input></md-input>
+        </md-field>
+        <md-field>
+          <label>Описание</label>
+          <md-input></md-input>
+        </md-field>
+        <md-field>
+          <label>Описание</label>
+          <md-input></md-input>
+        </md-field>
+        <md-field>
+          <label>Описание</label>
+          <md-input></md-input>
+        </md-field>
+       <div class="wrapperCoreInput">
           <div class="shell">
             <div class="core"></div>
           </div>
@@ -24,8 +38,6 @@
             <div class="core"></div>
           </div>
         </div>
-        <input class="inputFullsearch" placeholder="Введите текст">
-        <input class="inputFullsearch" placeholder="Введите текст">
       </div>
     </div>
     <button class="bottomsearch" @click="flagSerchBottom"><img src="../../assets/pictures/searchicon.png" draggable="false"/></button>
@@ -205,18 +217,30 @@ export default {
         })
       })
     },
+            // Смена флага для отображения поля поиска
     flagSerchBottom () {
       this.flagSerch = !this.flagSerch
     },
+            // Перебираем массив, присваивая параметру visible true или false
     serchinput (serchtext) {
-      this.data.forEach(item => {
-        item.tasks.forEach(items => {
-          items.visible = items.name.toLowerCase().startsWith(this.serchtext.toLowerCase())
+      console.log(this.serchtext)
+      this.data.forEach(items => {
+        items.tasks.forEach(item => {
+          item.visible = item.name.toLowerCase().startsWith(this.serchtext.toLowerCase())
         })
       })
     },
     metodFullsearch () {
       this.flagfullsearch = !this.flagfullsearch
+    },
+          //  поиск введенного текста по всему массиву
+    Fullsearch (serchtext) {
+      this.data.forEach(items => {
+        items.tasks.forEach(item => {
+          let pussy = JSON.stringify(item).toLowerCase().indexOf(this.serchtext.toLowerCase())
+          item.visible = JSON.stringify(item).toLowerCase().startsWith(this.serchtext.toLowerCase(),pussy)
+        })
+      })
     }
   },
   components: {
@@ -225,7 +249,6 @@ export default {
   }
 }
 </script>
-
 <style lang="stylus" scoped>
 .screen_wrapper
   height 100%
@@ -272,6 +295,7 @@ export default {
   border-radius 10px 0px 0px 10px
   border-left 5px solid #00bcd4
 .wrapperFullsearch
+  background-color #fff
   border solid 2px
   display flex
   flex-direction column
@@ -294,15 +318,6 @@ export default {
   justify-content space-evenly
   flex-grow 1
   Align-items center
-.inputFullsearch
-  width 150px
-  height 20px
-  border none
-  outline none
-  border-bottom solid 1px red
-  background-color rgba(0,0,0,0)
-  &:hover
-    border-bottom solid 1px blue
 .buttonFullsearch
   position absolute
   left -32px
