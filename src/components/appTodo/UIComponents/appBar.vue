@@ -3,22 +3,22 @@
     <div :class="['bar_layout', {'open': showBar}, position]" :style="[positionStyle, sizeStyle]">
       <span class="line first">
         <div class="transform_child">
-          <md-button class="md-fab md-primary" @click.native="$emit('create')">
+          <md-button class="md-fab md-primary" @click.native="simpleEvent('create')">
             <md-icon>add</md-icon>
           </md-button>
         </div>
       </span>
       <span class="line second">
         <div class="transform_child">
-          <md-button class="md-fab md-primary" @click.native="$emit('edit')">
+          <md-button class="md-fab md-primary" @click.native="simpleEvent('edit')">
             <md-icon>edit</md-icon>
           </md-button>
         </div>
       </span>
       <span class="line third">
         <div class="transform_child">
-          <md-button class="md-fab md-primary" @click.native="$emit('home')">
-            <md-icon>home</md-icon>
+          <md-button class="md-fab md-primary" @click.native="simpleEvent('search')">
+            <md-icon>search</md-icon>
           </md-button>
         </div>
       </span>
@@ -61,9 +61,6 @@ export default {
       sizeStyle: {}
     }
   },
-  created () {
-    console.log(this.positionStyle)
-  },
   watch: {
     showBar (to, fr) {
       if (to && this.radius && this.radius < 550 && this.radius > 385) {
@@ -73,11 +70,12 @@ export default {
       }
     }
   },
-  filters: {
-  },
   methods: {
-  },
-  components: {
+    simpleEvent (event) {
+      this.$emit(event)
+      this.$emit('close')
+      this.showBar = false
+    }
   }
 }
 </script>

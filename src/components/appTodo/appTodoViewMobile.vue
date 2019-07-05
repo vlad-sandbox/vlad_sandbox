@@ -3,11 +3,16 @@
   <div class="phone_border_wrapper">
     <img class="phone" src="../../assets/pictures/pixel.png"/>
     <div class="content-wrapper">
-
-      <app-bar position="bottom-right" :radius="410" @create="toggleCreateTask" @edit="() => log('edit')" @home="() => log('home')"/>
-
-      <input class="inputsearch" v-if="flagSerch" @input="serchinput" v-model="serchtext">
+      <!-- Функциональный бар -->
+      <app-bar position="bottom-right" :radius="410" @create="toggleCreateTask" @edit="() => log('edit')" @search="toggleSearch"/>
+      <!-- Поиск -->
+      <label class="search" v-if="showSearch" >
+        <input @input="serchinput" v-model="serchtext" autofocus placeholder="Поиск">
+        <md-icon>search</md-icon>
+      </label>
+      <!-- Блок со списоком задач -->
       <app-task-list :data="data" @pushclose = "runclosetasks"></app-task-list>
+      <!-- Модал создания записи -->
       <md-dialog :md-active.sync="createNewTask">
         <md-dialog-title>Новая задача</md-dialog-title>
         <app-task-manager @create="pushTask"></app-task-manager>
@@ -122,7 +127,7 @@ export default {
     return {
       data: dataItems,
       createNewTask: false,
-      flagSerch: false,
+      showSearch: false,
       serchtext: '',
       flagfullsearch: false
     }
@@ -191,8 +196,8 @@ export default {
       })
     },
     // Смена флага для отображения поля поиска
-    flagSerchBottom () {
-      this.flagSerch = !this.flagSerch
+    toggleSearch () {
+      this.showSearch = !this.showSearch
     },
     // Перебираем массив, присваивая параметру visible true или false
     serchinput (serchtext) {
@@ -244,12 +249,32 @@ export default {
       flex-direction column
       flex-grow 1
       max-height 637px
+      min-height 100%
   .phone
     position absolute
     left 0
     top 0
     z-index 1
     pointer-events none
+  .search
+    display flex
+    justify-content space-between
+    align-items center
+    input
+      padding 5px 35px 5px 5px
+      text-overflow ellipsis
+      overflow hidden
+      flex-grow 1
+      line-height 2
+      font-size 20px
+      outline none
+      border none
+      border-bottom 2px solid gray
+      &:focus
+        border-bottom 2px solid #7fcaa8
+    i
+      position absolute
+      right 5px
 
 @media (orientation: portrait)
   .phone_border_wrapper
