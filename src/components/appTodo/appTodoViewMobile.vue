@@ -3,9 +3,9 @@
   <div class="phone_border_wrapper">
     <img class="phone" src="../../assets/pictures/pixel.png"/>
     <div class="content-wrapper">
-      <md-button class="md-fab md-primary md-fab-bottom-right" @click.native="toggleCreateTask()">
-        <md-icon>add</md-icon>
-      </md-button>
+
+      <app-bar position="bottom-right" :radius="410" @create="toggleCreateTask" @edit="() => log('edit')" @home="() => log('home')"/>
+
       <input class="inputsearch" v-if="flagSerch" @input="serchinput" v-model="serchtext">
       <app-task-list :data="data" @pushclose = "runclosetasks"></app-task-list>
       <md-dialog :md-active.sync="createNewTask">
@@ -21,6 +21,8 @@
 <script>
 import appTaskList from './todoComponents/appTaskList'
 import appTaskManager from './todoComponents/appTaskManager'
+import appBar from './UIComponents/appBar'
+
 const dateNow = () => new Date()
 const datePlan = () => {
   let date = new Date()
@@ -145,6 +147,10 @@ export default {
     // this.$set(this, 'имя глобальной переменной', this.lsGet(name))
   },
   methods: {
+    // вывод в консоль
+    log (value) {
+      console.log(value)
+    },
     pushTask (newTask) {
       let dateNow = new Date().toISOString().split('T')[0].replace(/-/g, '.')
       if (dateNow !== this.data[this.data.length - 1].date) {
@@ -212,7 +218,8 @@ export default {
   },
   components: {
     appTaskList,
-    appTaskManager
+    appTaskManager,
+    appBar
   }
 }
 </script>
@@ -231,6 +238,7 @@ export default {
     height 735px
     .content-wrapper
       background white
+      overflow hidden
       position relative
       display flex
       flex-direction column
