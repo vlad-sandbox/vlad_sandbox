@@ -217,11 +217,11 @@ export default {
         })
       })
     },
-            // Смена флага для отображения поля поиска
+// Смена флага для отображения поля поиска
     flagSerchBottom () {
       this.flagSerch = !this.flagSerch
     },
-            // Перебираем массив, присваивая параметру visible true или false
+// Перебираем массив, присваивая параметру visible true или false
     serchinput (serchtext) {
       console.log(this.serchtext)
       this.data.forEach(items => {
@@ -233,7 +233,7 @@ export default {
     metodFullsearch () {
       this.flagfullsearch = !this.flagfullsearch
     },
-          //  поиск введенного текста по всему массиву
+//  поиск введенного текста по всему массиву
     Fullsearch (serchtext) {
       this.data.forEach(items => {
         items.tasks.forEach(item => {
@@ -307,7 +307,7 @@ export default {
   top 20px
   border-right none
   border-radius 50px 0 0 50px
-  border-color #448aff
+  border-color #E8E6D1
 .wrapperFullsearchOpen
   transition all .5s
   margin-left -250px
@@ -325,8 +325,10 @@ export default {
   height 70px
   border-radius 50px 0 0 50px
   outline none
-  border none
-  background-color #448aff
+  border 2px solid #E8E6D1
+  border-color #E8DECF
+  border-right none
+  background-color #fff
   &:active
     outline none
     box-shadow 0 0 10px rgba(0,0,0,0.5)
