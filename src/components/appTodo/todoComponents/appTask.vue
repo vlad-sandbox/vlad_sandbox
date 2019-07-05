@@ -2,15 +2,18 @@
 <div>
   <div class="wrapperminmaxtask">
     <div class="wrappermintask" @click="flagtask()" :class="{'wrappermaxtask': task.fullmode}">
-      <div class="taskstatus" :class=task.status @click="toggleStatus()"><span></span></div>
-      <div class="taskname"><h2>{{task.name}}</h2></div>
-      <div class="taskdescription">{{task.description}}</div>
+      <md-icon class="md-size-2x">{{icon}}</md-icon>
+      <div class="minimal">
+        <div class="taskname"><h2>{{task.name}}</h2></div>
+        <div class="taskdescription"><p>{{task.description}}</p></div>
+      </div>
+      <div v-if="task.fullmode" class="taskstatus" :class=task.status @click="toggleStatus()"><span></span></div>
       <div v-if="task.fullmode">{{task.date_start | dateFilter}}</div>
       <div v-if="task.fullmode">{{task.date_planning | dateFilter}}</div>
       <md-chips v-if="task.fullmode" v-model="task.tags" md-placeholder="Tags..."></md-chips>
     </div>
-    <div v-if = "task.fullmode" class="xstyle" @click.self="xstyleTask()">X</div>
-    <div v-if = "task.fullmode" class="rstyle" @click.self="RstyleTask()">R</div>
+    <div v-if = "task.fullmode" class="xstyle"><md-icon @click.native.self="xstyleTask()">close</md-icon></div>
+    <div v-if = "task.fullmode" class="rstyle"><md-icon @click.native.self="RstyleTask()">edit</md-icon></div>
     <md-dialog :md-active.sync="editflag">
       <md-dialog-title>Редактирование задачи</md-dialog-title>
       <app-task-edit @closewindow="RstyleTask" :editflag="editflag" :task="task"></app-task-edit>
@@ -22,7 +25,7 @@
 import appTaskEdit from './appTaskEdit'
 export default {
   name: 'task-list',
-  props: ['task'],
+  props: ['task', 'icon'],
   data () {
     return {
       prufe: false,
@@ -79,14 +82,31 @@ export default {
   display flex
   justify-content space-between
   align-items center
-  border 1px solid
-  border-radius 10px
-  margin 10px
-  padding 20px
   word-wrap break-word
   min-height 82px
   transition all .3s
   overflow hidden
+  margin 5px
+  background white
+  box-shadow 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
+  .minimal
+    flex-grow 1
+    display flex
+    flex-wrap wrap
+    align-items flex-start
+    color #212121
+    h2
+      font-weight 500
+      font-family Roboto,sans-serif
+      color #212121
+      margin 0
+      text-align left
+      padding-left 20px
+    p
+      color #8f8f8f
+      margin 0
+      text-align left
+      padding-left 20px
 .wrappermaxtask
   flex-direction column
   min-height 200px

@@ -7,7 +7,7 @@
       <app-bar position="bottom-right" :radius="410" @create="toggleCreateTask" @edit="() => log('edit')" @search="toggleSearch"/>
       <!-- Поиск -->
       <label class="search" v-if="showSearch" >
-        <input @input="serchinput" v-model="serchtext" autofocus placeholder="Поиск">
+        <input @input="serchinput" @change="toggleSearch()" v-model="serchtext" autofocus placeholder="Поиск">
         <md-icon>search</md-icon>
       </label>
       <!-- Блок со списоком задач -->
@@ -242,7 +242,7 @@ export default {
     overflow hidden
     height 735px
     .content-wrapper
-      background white
+      background #fafafa
       overflow hidden
       position relative
       display flex

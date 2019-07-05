@@ -4,7 +4,7 @@
     <h3 class="label">{{item.date}}</h3>
     <div class="wrapper_tasks">
       <template v-for="(task, i) in item.tasks">
-        <app-task v-if="task.visible" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
+        <app-task v-if="task.visible" :task="task" :icon="icons[i]" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
       </template>
     </div>
   </div>
@@ -12,11 +12,14 @@
 </template>
 <script>
 import appTask from './appTask'
+
+const iconsConst = ['mood', 'cake', 'personal_video', 'mood_bad']
 export default {
   name: 'app-task-list',
   props: ['data'],
   data () {
     return {
+      icons: iconsConst
     }
   },
   watch: {
@@ -50,7 +53,6 @@ export default {
   scroll-behavior smooth
   .child
     .wrapper_tasks
-      border-radius 10px 0px 0px 10px
     &:nth-child(1)
       .wrapper_tasks
         border-left 5px solid #00bcd4
@@ -72,15 +74,9 @@ export default {
   &::-webkit-scrollbar-thumb
     background-color #7fcaa8
 
-.wrapper_tasks
-  box-shadow 0px 0px 3px #757575
-  background-color white
-  padding 15px
-  margin 0px 0px 25px 0px
-
 .label
   color #546e7a
-  margin 0
   padding-left 20px
+  font-size 22px
   text-align left
 </style>

@@ -62,7 +62,7 @@ export default new Router({
     },
     {
       path: '/mTodo',
-      name: 'Todo',
+      name: 'mTodo',
       component: TodoMobile
     },
     {
