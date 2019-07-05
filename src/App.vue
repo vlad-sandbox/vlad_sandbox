@@ -12,6 +12,7 @@
       <router-link to="/LessonOne">VL Chat</router-link> |
       <router-link to="/Variables">Variables</router-link> |
       <router-link to="/Todo">ToDo</router-link> |
+      <router-link to="/mTodo">ToDo Mobile</router-link> |
       <router-link to="/Testflex">Testflex</router-link>
     </div>
     <router-view @colortheme = "appendcolortheme"></router-view>
