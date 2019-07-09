@@ -1,5 +1,6 @@
 <template>
 <div class="screen_wrapper">
+  <button @click="lessonObjperebor">test</button>
   <div class="phone_border_wrapper">
     <img class="phone" src="../../assets/pictures/pixel.png"/>
     <div class="content-wrapper">
@@ -219,7 +220,34 @@ export default {
           item.visible = JSON.stringify(item).toLowerCase().startsWith(this.serchtext.toLowerCase(), pussy)
         })
       })
-    }
+    },
+    //Из массива в объект
+    lessonMassObj () {
+      let obj = {id:{}}
+      let mass = [
+        {id: 426, name: 'petya'},
+        {id: 839, name: 'vasya'}
+      ]
+      mass.forEach(items => {
+        obj[items.id] = items
+       // obj = {
+       //   [items.id]: items
+       // }
+      })
+     },
+     //Из объекта в массив
+     lessonObjperebor () {
+       let obj = {
+        id: 426,
+        name: 'petya'
+        }
+        Object.keys(obj).forEach(key => {
+          console.log(obj[key])
+        })
+        Object.keys(obj).map(key => obj[key]).forEach(item => {
+          console.log(item)
+        })
+      }
   },
   components: {
     appTaskList,
