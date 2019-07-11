@@ -235,7 +235,7 @@ export default {
     },
     //  поиск введенного текста по всему массиву
     Fullsearch (serchtext) {
-      this.data.forEach(items => {
+      this.data.forEach(items => { 
         items.tasks.forEach(item => {
           let pussy = JSON.stringify(item).toLowerCase().indexOf(this.serchtext.toLowerCase())
           item.visible = JSON.stringify(item).toLowerCase().startsWith(this.serchtext.toLowerCase(), pussy)

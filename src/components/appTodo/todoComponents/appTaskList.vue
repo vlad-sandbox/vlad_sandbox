@@ -13,7 +13,7 @@
 <script>
 import appTask from './appTask'
 
-const iconsConst = ['mood', 'cake', 'personal_video', 'mood_bad']
+const iconsConst = ['backup', 'mood', 'cake', 'personal_video', 'mood_bad']
 export default {
   name: 'app-task-list',
   props: ['data'],

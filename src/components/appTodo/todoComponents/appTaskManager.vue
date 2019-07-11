@@ -1,5 +1,7 @@
 <template>
 <div class="task_wrapper">
+  <!-- Тут будет тег с выбором картинки -->
+  <icon-box>pussy</icon-box>
   <md-field>
     <label>Название</label>
     <md-input v-model="taskData.name" md-counter="30" required></md-input>
@@ -35,7 +37,7 @@ const taskClear = {
   fullmode: false,
   visible: true
 }
-
+import iconBox from '../UIComponents/iconBox'
 export default {
   name: 'app-task-manager',
   data () {
@@ -63,6 +65,7 @@ export default {
     }
   },
   components: {
+    iconBox
   }
 }
 </script>
@@ -77,4 +80,20 @@ export default {
   padding 20px
   display flex
   flex-direction column
+.iconBox
+  display flex
+  flex-direction row
+.iconHome
+  color green
+.icons
+  display flex
+  flex-wrap wrap
+  justify-content space-between
+  align-items center 
+  background-color blue
+  height 100px
+  width 250
+.icon
+  flex 0 0 32%
+  background-color red
 </style>

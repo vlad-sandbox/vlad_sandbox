@@ -1,6 +1,5 @@
 <template>
 <div class="screen_wrapper">
-  <button @click="lessonObjperebor">test</button>
   <div class="phone_border_wrapper">
     <img class="phone" src="../../assets/pictures/pixel.png"/>
     <div class="content-wrapper">
