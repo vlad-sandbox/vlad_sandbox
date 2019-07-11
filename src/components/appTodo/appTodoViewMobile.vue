@@ -221,33 +221,30 @@ export default {
         })
       })
     },
-    //Из массива в объект
+    // Из массива в объект
     lessonMassObj () {
-      let obj = {id:{}}
+      let obj = { id: {} }
       let mass = [
-        {id: 426, name: 'petya'},
-        {id: 839, name: 'vasya'}
+        { id: 426, name: 'petya' },
+        { id: 839, name: 'vasya' }
       ]
       mass.forEach(items => {
         obj[items.id] = items
-       // obj = {
-       //   [items.id]: items
-       // }
       })
-     },
-     //Из объекта в массив
-     lessonObjperebor () {
-       let obj = {
+    },
+    // Из объекта в массив
+    lessonObjperebor () {
+      let obj = {
         id: 426,
         name: 'petya'
-        }
-        Object.keys(obj).forEach(key => {
-          console.log(obj[key])
-        })
-        Object.keys(obj).map(key => obj[key]).forEach(item => {
-          console.log(item)
-        })
       }
+      Object.keys(obj).forEach(key => {
+        console.log(obj[key])
+      })
+      Object.keys(obj).map(key => obj[key]).forEach(item => {
+        console.log(item)
+      })
+    }
   },
   components: {
     appTaskList,
