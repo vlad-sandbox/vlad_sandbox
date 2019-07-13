@@ -1,7 +1,7 @@
 <template>
   <div class="iconBoxx">
-    <div class="iconHome" @click="OpenCloseIcons">
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+    <div class="iconHome">
+      <img :src="require('@/assets/pictures/' + imageName)"/>
     </div>
     <div class="icons" v-if = flagicons>
       <img @click="rename" class="icon" :src="require('@/assets/pictures/' + imageName)"/>

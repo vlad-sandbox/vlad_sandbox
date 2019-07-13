@@ -1,23 +1,24 @@
 <template>
 <div>
-  <div class="wrapperminmaxtask">
-    <div class="wrappermintask" @click="flagtask()" :class="{'wrappermaxtask': task.fullmode}">
-      <md-icon class="md-size-2x">{{icon}}</md-icon>
-      <div class="minimal">
-        <div class="taskname"><h2>{{task.name}}</h2></div>
-        <div class="taskdescription"><p>{{task.description}}</p></div>
-      </div>
-      <div v-if="task.fullmode" class="taskstatus" :class=task.status @click="toggleStatus()"><span></span></div>
-      <div v-if="task.fullmode">{{task.date_start | dateFilter}}</div>
-      <div v-if="task.fullmode">{{task.date_planning | dateFilter}}</div>
-      <md-chips v-if="task.fullmode" v-model="task.tags" md-placeholder="Tags..."></md-chips>
+  <div class="wrapper_task">
+    <div class="task_status" :class=task.status @click="toggleStatus()"><span></span></div>
+    <img :src="require('@/assets/icons/' + task.iconname)" width="60" height="60"/>
+    <div class="wrapper_fields">
+      <div class="task_name"><h2>{{task.name}}</h2></div>
+      <div class="task_description"><p>{{task.description}}</p></div>
     </div>
-    <div v-if = "task.fullmode" class="xstyle"><md-icon @click.native.self="xstyleTask()">close</md-icon></div>
-    <div v-if = "task.fullmode" class="rstyle"><md-icon @click.native.self="RstyleTask()">edit</md-icon></div>
+    <div class="task_operations">
+      <div class="close"><md-icon @click.native.self="close()">close</md-icon></div>
+      <div class="redact"><md-icon @click.native.self="redact()">edit</md-icon></div>
+    </div>
     <md-dialog :md-active.sync="editflag">
       <md-dialog-title>Редактирование задачи</md-dialog-title>
-      <app-task-edit @closewindow="RstyleTask" :editflag="editflag" :task="task"></app-task-edit>
+      <app-task-edit @closewindow="redact" :editflag="editflag" :task="task"></app-task-edit>
     </md-dialog>
+    <div class="task_time"><p>{{task.time}}</p></div>
+    <div class="task_tags">
+        <span v-for="tag in task.tags" :key="tag">#{{tag}}</span>
+      </div>
   </div>
 </div>
 </template>
@@ -25,30 +26,17 @@
 import appTaskEdit from './appTaskEdit'
 export default {
   name: 'task-list',
-  props: ['task', 'icon'],
+  props: ['task'],
   data () {
     return {
       prufe: false,
+      icon: Math.floor(Math.random() * (41 - 1)) + 1,
       editflag: false
     }
   },
   watch: {
   },
-  filters: {
-    dateFilter (v) {
-      try {
-        return v.toISOString().split('T')[0].split('-').reverse().join('.')
-      } catch (e) {
-        return v.split('-').reverse().join('.')
-      }
-    }
-  },
   methods: {
-    taskstatusaprufe () {
-      if (this.task.status === open) {
-        this.prufe = true
-      }
-    },
     // Переключаем статус задачи (выполнена/открыта)
     toggleStatus () {
       let statusMatrix = {
@@ -57,14 +45,10 @@ export default {
       }
       this.task.status = statusMatrix[this.task.status]
     },
-    flagtask () {
-      this.$emit('pushclose', this.task.fullmode)
-      this.task.fullmode = true
-    },
-    xstyleTask () {
+    close () {
       this.task.fullmode = false
     },
-    RstyleTask () {
+    redact () {
       this.editflag = !this.editflag
     }
   },
@@ -74,78 +58,86 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
-.taskname, .taskdescription
-  flex-grow 1
-.wrapperminmaxtask
+.wrapper_task
   position relative
-.wrappermintask
+  min-height 100px 
   display flex
-  justify-content space-between
   align-items center
   word-wrap break-word
-  min-height 82px
   transition all .3s
-  overflow hidden
   margin 5px
   background white
   box-shadow 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
-  .minimal
-    flex-grow 1
+  h2
+    font-weight 500
+    font-size 20px
+    font-family Roboto,sans-serif
+    color #455a64
+    margin 5px 0px
+    text-align left
+  p
+    color #8f8f8f
+    margin 0
+    text-align left
+  img
+    margin 5px
+  .wrapper_fields
     display flex
-    flex-wrap wrap
-    align-items flex-start
-    color #212121
-    h2
-      font-weight 500
-      font-family Roboto,sans-serif
-      color #212121
-      margin 0
-      text-align left
-      padding-left 20px
-    p
-      color #8f8f8f
-      margin 0
-      text-align left
-      padding-left 20px
-.wrappermaxtask
-  flex-direction column
-  min-height 200px
-  transition all .3s
-.xstyle
+    flex-direction column
+    flex-grow 1
+    height 100px
+    padding 10px
+
+.task_time
   position absolute
-  right 25px
-  top 10px
-  &:hover
-    cursor pointer
-.rstyle
+  bottom 5px
+  left 5px
+.task_status
   position absolute
-  right 25px
-  top 30px
-  &:hover
-    cursor pointer
-.taskstatus
+  top 5px
+  left 5px
   width 20px
   height 20px
-  min-width 20px
-  min-height 20px
-  border-radius 20px
+  border-radius 50%
   display flex
-  transition all .3s
-  &:hover
-    cursor pointer
-  &:active
-    transform scale(.7, .7)
-  &.close
-    border 1px solid green
+  span
+    width 10px
+    height 10px
+    border-radius 50%
+    margin auto
+  &.open
     span
       background green
-  &.open
-    border 1px solid red
+  &.close
     span
       background red
+
+.task_operations
+  display flex
+  flex-direction column
+  height 100px
+  margin 5px
+  .close, .redact
+    width 20px
+    height 20px
+    margin 5px
+
+.task_tags
+  position absolute
+  right 5px
+  bottom 5px
+  color grey
+  display flex
+  flex-direction row-reverse
+  width 80%
+  overflow-x auto
   span
-    width 15px
-    height 15px
-    margin auto
-    border-radius 50%
+    margin-right 5px
+  &::-webkit-scrollbar
+    height 3px
+    width 3px
+  &::-webkit-scrollbar-track
+    background-color #eaeaea
+  &::-webkit-scrollbar-thumb
+    background-color #7fcaa8
 </style>

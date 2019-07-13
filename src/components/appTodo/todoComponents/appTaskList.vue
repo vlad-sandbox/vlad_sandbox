@@ -4,7 +4,7 @@
     <h3 class="label">{{item.date}}</h3>
     <div class="wrapper_tasks">
       <template v-for="(task, i) in item.tasks">
-        <app-task v-if="task.visible" :task="task" :icon="icons[i]" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
+        <app-task v-if="task.visible" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
       </template>
     </div>
   </div>
@@ -12,14 +12,11 @@
 </template>
 <script>
 import appTask from './appTask'
-
-const iconsConst = ['backup', 'mood', 'cake', 'personal_video', 'mood_bad']
 export default {
   name: 'app-task-list',
   props: ['data'],
   data () {
     return {
-      icons: iconsConst
     }
   },
   watch: {

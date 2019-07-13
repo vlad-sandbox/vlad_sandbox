@@ -16,11 +16,11 @@
     <label>Время</label>
     <md-input v-model="taskData.time" type="time"></md-input>
   </md-field>
-  <md-field>
+  <!-- <md-field>
     <md-icon>event</md-icon>
     <label>Планируемая дата</label>
     <md-input v-model="taskData.date_planning" type="date"></md-input>
-  </md-field>
+  </md-field> -->
   <md-chips v-model="taskData.tags" md-placeholder="Tags..."></md-chips>
   <md-button class="md-primary" @click="createNewTask">Создать</md-button>
 </div>

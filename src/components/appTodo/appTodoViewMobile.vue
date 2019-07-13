@@ -40,33 +40,30 @@ const dataItems = [
     'tasks': [
       {
         'name': 'Первая задача',
-        'date_start': dateNow(),
-        'date_planning': datePlan(),
         'status': 'close',
+        'time': '23:00',
         'description': 'Описание первой задачи',
-        'tags': [],
+        'tags': ['ПервыйТег'],
         'fullmode': false,
         'visible': true
       },
       {
         'name': 'Вторая задача',
-        'date_start': dateNow(),
-        'date_planning': datePlan(),
         'status': 'close',
+        'time': '13:00',
         'description': 'Описание второй задачи',
-        'tags': [],
+        'tags': ['Срочно'],
         'fullmode': false,
         'visible': true
       },
       {
         'name': 'Третья задача',
-        'date_start': dateNow(),
-        'date_planning': datePlan(),
         'status': 'close',
+        'time': '19:00',
         'description': 'Описание третьей задачи',
-        'visible': true,
-        'tags': [],
-        'fullmode': false
+        'tags': ['Важно'],
+        'fullmode': false,
+        'visible': true
       }
     ]
   },
@@ -75,21 +72,19 @@ const dataItems = [
     'tasks': [
       {
         'name': 'Первая задача',
-        'date_start': dateNow(),
-        'date_planning': datePlan(),
         'status': 'close',
+        'time': '19:00',
         'description': 'Описание первой задачи',
-        'tags': [],
+        'tags': ['Обязательно', 'ДляВлада', 'Важно', 'НеЗабудь'],
         'fullmode': false,
         'visible': true
       },
       {
         'name': 'Вторая задача',
-        'date_start': dateNow(),
-        'date_planning': datePlan(),
+        'time': '23:00',
         'status': 'open',
         'description': 'Описание второй задачи',
-        'tags': [],
+        'tags': ['ДляВлада'],
         'fullmode': false,
         'visible': true
       }
@@ -100,21 +95,19 @@ const dataItems = [
     'tasks': [
       {
         'name': 'Первая задача',
-        'date_start': dateNow(),
-        'date_planning': datePlan(),
+        'time': '17:00',
         'status': 'open',
         'description': 'Описание первой задачи',
-        'tags': [],
+        'tags': ['БезТега'],
         'fullmode': false,
         'visible': true
       },
       {
         'name': 'Вторая задача',
-        'date_start': dateNow(),
-        'date_planning': datePlan(),
+        'time': '11:00',
         'status': 'open',
         'description': 'Описание второй задачи',
-        'tags': [],
+        'tags': ['Много', 'Тегов'],
         'fullmode': false,
         'visible': true
       }
