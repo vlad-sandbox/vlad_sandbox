@@ -7,7 +7,7 @@
       <app-bar position="bottom-right" :radius="410" @create="toggleCreateTask" @edit="() => log('edit')" @search="toggleSearch"/>
       <!-- Поиск -->
       <label class="search" v-if="showSearch" >
-        <input @input="serchinput" @change="toggleSearch()" v-model="serchtext" autofocus placeholder="Поиск">
+        <input @input="Fullsearch" @change="toggleSearch()" v-model="serchtext" autofocus placeholder="Поиск">
         <md-icon>search</md-icon>
       </label>
       <!-- Блок со списоком задач -->
