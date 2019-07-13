@@ -1,18 +1,10 @@
 <template>
   <div class="iconBoxx">
     <div class="iconHome" @click="OpenCloseIcons">
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/icons/' + icon + '.png')"/>
     </div>
     <div class="icons" v-if = flagicons>
-      <img @click="rename" class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
-      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img :key="i" v-for="i in 40" @click="rename(i)" class="icon" :src="require('@/assets/icons/' + i + '.png')"/>
     </div>
   </div>
 </template>
@@ -21,8 +13,9 @@ export default {
   name: 'iconbox',
   data () {
     return {
-      imageName: 'searchicon.png',
-      flagicons: false
+      icon: 1,
+      flagicons: false,
+      iconprod: '1.png'
     }
   },
   watch: {},
@@ -30,9 +23,11 @@ export default {
     OpenCloseIcons () {
       this.flagicons = !this.flagicons
     },
-    rename () {
-      let kitty = 'pussy'
-      console.log(kitty)
+    rename (i) {
+      this.icon = i
+      this.flagicons = !this.flagicons
+      this.iconprod = this.icon + '.png'
+      this.$emit('iconpush', this.iconprod)
     }
   },
   components: {}
@@ -47,11 +42,12 @@ export default {
 .icons
   display flex
   flex-wrap wrap
-  justify-content space-between
-  background-color blue
+  justify-content space-evenly
   height 100px
-  width 100%
+  width 70%
+  overflow-y scroll
 .icon
-  width 33%
-  max-height 30px
+  width 50px
+  height 50px
+  margin 3%
 </style>

@@ -45,6 +45,7 @@ const dataItems = [
         'status': 'close',
         'description': 'Описание первой задачи',
         'tags': [],
+        'iconname': '1.png',
         'fullmode': false,
         'visible': true
       },
@@ -55,6 +56,7 @@ const dataItems = [
         'status': 'close',
         'description': 'Описание второй задачи',
         'tags': [],
+        'iconname': '1.png',
         'fullmode': false,
         'visible': true
       },
@@ -66,6 +68,7 @@ const dataItems = [
         'description': 'Описание третьей задачи',
         'visible': true,
         'tags': [],
+        'iconname': '1.png',
         'fullmode': false
       }
     ]
@@ -80,6 +83,7 @@ const dataItems = [
         'status': 'close',
         'description': 'Описание первой задачи',
         'tags': [],
+        'iconname': '1.png',
         'fullmode': false,
         'visible': true
       },
@@ -90,6 +94,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание второй задачи',
         'tags': [],
+        'iconname': '1.png',
         'fullmode': false,
         'visible': true
       }
@@ -105,6 +110,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание первой задачи',
         'tags': [],
+        'iconname': '1.png',
         'fullmode': false,
         'visible': true
       },
@@ -115,6 +121,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание второй задачи',
         'tags': [],
+        'iconname': '1.png',
         'fullmode': false,
         'visible': true
       }

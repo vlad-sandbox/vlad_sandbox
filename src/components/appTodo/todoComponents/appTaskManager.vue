@@ -1,7 +1,6 @@
 <template>
 <div class="task_wrapper">
-  <!-- Тут будет тег с выбором картинки -->
-  <icon-box></icon-box>
+  <icon-box @iconpush="geticon"></icon-box>
   <md-field>
     <label>Название</label>
     <md-input v-model="taskData.name" md-counter="30" required></md-input>
@@ -34,6 +33,7 @@ const taskClear = {
   time: new Date().getTime(),
   date_start: new Date(),
   tags: [],
+  iconname: '1.png',
   fullmode: false,
   visible: true
 }
@@ -50,6 +50,7 @@ export default {
         time: new Date().getTime(),
         date_start: new Date(),
         tags: [],
+        iconname: '1.png',
         fullmode: false,
         visible: true
       }
@@ -62,6 +63,9 @@ export default {
       let data = this.taskData
       this.$emit('create', data)
       this.taskData = taskClear
+    },
+    geticon (iconprod) {
+      this.taskData.iconname = iconprod
     }
   },
   components: {
