@@ -3,9 +3,11 @@
   <div v-for="item in data" class="child" :key="item.date">
     <h3 class="label">{{item.date}}</h3>
     <div class="wrapper_tasks">
-      <template v-for="(task, i) in item.tasks">
-        <app-task v-if="task.visible" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
-      </template>
+        <template v-for="(task, i) in item.tasks">
+          <transition name="task" :key="'task' + i">
+            <app-task v-if="task.visible" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
+          </transition>
+        </template>
     </div>
   </div>
 </div>
@@ -76,4 +78,16 @@ export default {
   padding-left 20px
   font-size 22px
   text-align left
+
+.task-enter-active, .task-leave-active
+  transition all .5s ease
+
+.task-enter
+  transform translateX(-100%) scale(1, 0)
+  opacity 0
+
+.task-leave-to
+  transform translateX(100%) scale(1, 0)
+  opacity 0
+
 </style>
