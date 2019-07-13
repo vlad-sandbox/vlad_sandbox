@@ -1,24 +1,26 @@
 <template>
   <div class="iconBoxx">
-    <div class="iconHome">iconHome</div>
+    <div class="iconHome"><img :src="'./src/assets/pictures/searchicon.png'"></div>
     <div class="icons">
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
-      <div class="icon">icon</div>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
+      <md-icon class="icon">icon</md-icon>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: 'iconbox',
-  data () {
-    return {}
+  default () {
+    return {
+      iconka: 'searchicon.png'
+    }
   },
   watch: {},
   methods: {},

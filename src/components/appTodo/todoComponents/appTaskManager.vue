@@ -1,7 +1,7 @@
 <template>
 <div class="task_wrapper">
   <!-- Тут будет тег с выбором картинки -->
-  <icon-box>pussy</icon-box>
+  <icon-box></icon-box>
   <md-field>
     <label>Название</label>
     <md-input v-model="taskData.name" md-counter="30" required></md-input>
