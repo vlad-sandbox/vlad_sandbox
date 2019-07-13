@@ -8,7 +8,7 @@
       <div class="task_description"><p>{{task.description}}</p></div>
     </div>
     <div class="task_operations">
-      <div class="close"><md-icon @click.native.self="close()">close</md-icon></div>
+      <!-- <div class="close"><md-icon @click.native.self="close()">close</md-icon></div> -->
       <div class="redact"><md-icon @click.native.self="redact()">edit</md-icon></div>
     </div>
     <md-dialog :md-active.sync="editflag">

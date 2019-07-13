@@ -43,7 +43,7 @@ const dataItems = [
         'status': 'close',
         'time': '23:00',
         'description': 'Описание первой задачи',
-        'iconname': '1.png',
+        'iconname': '25.png',
         'tags': ['ПервыйТег'],
         'fullmode': false,
         'visible': true
@@ -53,7 +53,7 @@ const dataItems = [
         'status': 'close',
         'time': '13:00',
         'description': 'Описание второй задачи',
-        'iconname': '1.png',
+        'iconname': '21.png',
         'tags': ['Срочно'],
         'fullmode': false,
         'visible': true
@@ -66,7 +66,7 @@ const dataItems = [
         'tags': ['Важно'],
         'fullmode': false,
         'visible': true,
-        'iconname': '1.png'
+        'iconname': '15.png'
       }
     ]
   },
@@ -79,7 +79,7 @@ const dataItems = [
         'time': '19:00',
         'description': 'Описание первой задачи',
         'tags': ['Обязательно', 'ДляВлада', 'Важно', 'НеЗабудь'],
-        'iconname': '1.png',
+        'iconname': '7.png',
         'fullmode': false,
         'visible': true
       },
@@ -88,7 +88,7 @@ const dataItems = [
         'time': '23:00',
         'status': 'open',
         'description': 'Описание второй задачи',
-        'iconname': '1.png',
+        'iconname': '37.png',
         'tags': ['ДляВлада'],
         'fullmode': false,
         'visible': true
@@ -104,7 +104,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание первой задачи',
         'tags': ['БезТега'],
-        'iconname': '1.png',
+        'iconname': '30.png',
         'fullmode': false,
         'visible': true
       },
@@ -114,7 +114,7 @@ const dataItems = [
         'status': 'open',
         'description': 'Описание второй задачи',
         'tags': ['Много', 'Тегов'],
-        'iconname': '1.png',
+        'iconname': '11.png',
         'fullmode': false,
         'visible': true
       }
