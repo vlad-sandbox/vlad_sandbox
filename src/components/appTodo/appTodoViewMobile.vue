@@ -65,8 +65,8 @@ const dataItems = [
         'description': 'Описание третьей задачи',
         'tags': ['Важно'],
         'fullmode': false,
-        'visible': true
-        'iconname': '1.png',
+        'visible': true,
+        'iconname': '1.png'
       }
     ]
   },
