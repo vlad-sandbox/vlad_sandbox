@@ -1,19 +1,18 @@
 <template>
   <div class="iconBoxx">
-    <div class="iconHome">
-      <img :src="require('../../../assets/pictures/' + imageName)"/>
-      <!-- <img src="../../../assets/pictures/searchicon.png"/> -->
+    <div class="iconHome" @click="OpenCloseIcons">
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
     </div>
-    <div class="icons">
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
-      <md-icon class="icon">icon</md-icon>
+    <div class="icons" v-if = flagicons>
+      <img @click="rename" class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
+      <img class="icon" :src="require('@/assets/pictures/' + imageName)"/>
     </div>
   </div>
 </template>
@@ -22,11 +21,20 @@ export default {
   name: 'iconbox',
   data () {
     return {
-      imageName: 'searchicon.png'
+      imageName: 'searchicon.png',
+      flagicons: false
     }
   },
   watch: {},
-  methods: {},
+  methods: {
+    OpenCloseIcons () {
+      this.flagicons = !this.flagicons
+    },
+    rename () {
+      let kitty = 'pussy'
+      console.log(kitty)
+    }
+  },
   components: {}
 }
 </script>
@@ -40,11 +48,10 @@ export default {
   display flex
   flex-wrap wrap
   justify-content space-between
-  align-items center 
   background-color blue
   height 100px
-  width 250
+  width 100%
 .icon
-  flex 0 0 32%
-  background-color red
+  width 33%
+  max-height 30px
 </style>
