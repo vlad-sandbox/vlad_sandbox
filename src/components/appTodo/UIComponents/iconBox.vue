@@ -1,6 +1,9 @@
 <template>
   <div class="iconBoxx">
-    <div class="iconHome"><img :src="'./src/assets/pictures/searchicon.png'"></div>
+    <div class="iconHome">
+      <img :src="require('../../../assets/pictures/' + imageName)"/>
+      <!-- <img src="../../../assets/pictures/searchicon.png"/> -->
+    </div>
     <div class="icons">
       <md-icon class="icon">icon</md-icon>
       <md-icon class="icon">icon</md-icon>
@@ -17,9 +20,9 @@
 <script>
 export default {
   name: 'iconbox',
-  default () {
+  data () {
     return {
-      iconka: 'searchicon.png'
+      imageName: 'searchicon.png'
     }
   },
   watch: {},
