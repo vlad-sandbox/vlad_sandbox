@@ -28,17 +28,18 @@ import appTaskList from './todoComponents/appTaskList'
 import appTaskManager from './todoComponents/appTaskManager'
 import appBar from './UIComponents/appBar'
 
-const dateNow = () => new Date()
-const datePlan = () => {
-  let date = new Date()
-  date.setDate(date.getDate() + 1)
-  return date
-}
+// const dateNow = () => new Date()
+// const datePlan = () => {
+// let date = new Date()
+// date.setDate(date.getDate() + 1)
+// return date
+// }
 const dataItems = [
   {
     'date': '2019.06.04',
     'tasks': [
       {
+        'key': '1',
         'name': 'Первая задача',
         'status': 'close',
         'time': '23:00',
@@ -49,6 +50,7 @@ const dataItems = [
         'visible': true
       },
       {
+        'key': '2',
         'name': 'Вторая задача',
         'status': 'close',
         'time': '13:00',
@@ -59,6 +61,7 @@ const dataItems = [
         'visible': true
       },
       {
+        'key': '3',
         'name': 'Третья задача',
         'status': 'close',
         'time': '19:00',
@@ -74,6 +77,7 @@ const dataItems = [
     'date': '2019.06.05',
     'tasks': [
       {
+        'key': '4',
         'name': 'Первая задача',
         'status': 'close',
         'time': '19:00',
@@ -84,6 +88,7 @@ const dataItems = [
         'visible': true
       },
       {
+        'key': '5',
         'name': 'Вторая задача',
         'time': '23:00',
         'status': 'open',
@@ -99,6 +104,7 @@ const dataItems = [
     'date': '2019.06.06',
     'tasks': [
       {
+        'key': '6',
         'name': 'Первая задача',
         'time': '17:00',
         'status': 'open',
@@ -109,6 +115,7 @@ const dataItems = [
         'visible': true
       },
       {
+        'key': '7',
         'name': 'Вторая задача',
         'time': '11:00',
         'status': 'open',
@@ -201,7 +208,6 @@ export default {
     },
     // Перебираем массив, присваивая параметру visible true или false
     serchinput (serchtext) {
-      console.log(this.serchtext)
       this.data.forEach(items => {
         items.tasks.forEach(item => {
           item.visible = item.name.toLowerCase().startsWith(this.serchtext.toLowerCase())

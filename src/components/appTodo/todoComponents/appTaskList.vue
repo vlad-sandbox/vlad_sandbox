@@ -5,7 +5,7 @@
     <div class="wrapper_tasks">
         <template v-for="(task, i) in item.tasks">
           <transition name="task" :key="'task' + i">
-            <app-task v-if="task.visible" :task="task" :key="'task' + i" @pushclose = "runclosetasks"></app-task>
+            <app-task v-if="task.visible" :task="task" :key="'task' + i" @pushclose = "runclosetasks" @pushdel = "deltask"></app-task>
           </transition>
         </template>
     </div>
@@ -26,6 +26,15 @@ export default {
   methods: {
     runclosetasks (fullmode) {
       this.$emit('pushclose', fullmode)
+    },
+    deltask (keydel) {
+      this.data.forEach(items => {
+        items.tasks.forEach((item, i) => {
+          if (keydel === item.key) {
+            items.tasks.splice(i, 1)
+          }
+        })
+      })
     }
   },
   components: {

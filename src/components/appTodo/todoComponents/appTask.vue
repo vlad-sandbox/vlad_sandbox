@@ -8,7 +8,7 @@
       <div class="task_description"><p>{{task.description}}</p></div>
     </div>
     <div class="task_operations">
-      <!-- <div class="close"><md-icon @click.native.self="close()">close</md-icon></div> -->
+      <div class="close"><md-icon @click.native.self="del()">delete</md-icon></div>
       <div class="redact"><md-icon @click.native.self="redact()">edit</md-icon></div>
     </div>
     <md-dialog :md-active.sync="editflag">
@@ -45,8 +45,8 @@ export default {
       }
       this.task.status = statusMatrix[this.task.status]
     },
-    close () {
-      this.task.fullmode = false
+    del () {
+      this.$emit('pushdel', this.task.key)
     },
     redact () {
       this.editflag = !this.editflag
@@ -60,7 +60,7 @@ export default {
 <style scoped lang="stylus">
 .wrapper_task
   position relative
-  min-height 100px 
+  min-height 100px
   display flex
   align-items center
   word-wrap break-word

@@ -33,10 +33,10 @@
 </template>
 <script>
 const positions = {
-  'bottom-right': {bottom: '-200px', right: '-200px'},
-  'bottom-left': {bottom: '-200px', left: '-200px'},
-  'top-right': {top: '-200px', right: '-200px'},
-  'top-left': {top: '-200px', left: '-200px'}
+  'bottom-right': { bottom: '-200px', right: '-200px' },
+  'bottom-left': { bottom: '-200px', left: '-200px' },
+  'top-right': { top: '-200px', right: '-200px' },
+  'top-left': { top: '-200px', left: '-200px' }
 }
 export default {
   name: 'app_bar',
@@ -64,7 +64,7 @@ export default {
   watch: {
     showBar (to, fr) {
       if (to && this.radius && this.radius < 550 && this.radius > 385) {
-        this.sizeStyle = {width: this.radius + 'px', height: this.radius + 'px'}
+        this.sizeStyle = { width: this.radius + 'px', height: this.radius + 'px' }
       } else {
         this.sizeStyle = {}
       }
@@ -105,7 +105,7 @@ export default {
     width 60px
     height 60px
     background #fece0d
-    display flex 
+    display flex
     flex-direction column
     align-items center
     justify-content center
@@ -210,5 +210,5 @@ export default {
         transform rotate(-105deg)
         .transform_child
           transform rotate(105deg)
-    
+
 </style>

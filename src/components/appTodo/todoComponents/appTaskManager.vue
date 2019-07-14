@@ -26,6 +26,7 @@
 </template>
 <script>
 const taskClear = {
+  key: 11,
   name: '',
   description: '',
   status: 'open',
@@ -43,6 +44,7 @@ export default {
   data () {
     return {
       taskData: {
+        key: 11,
         name: '',
         description: '',
         status: 'open',
@@ -60,6 +62,7 @@ export default {
   },
   methods: {
     createNewTask () {
+      this.taskData.key = this.taskData.key + 1
       let data = this.taskData
       this.$emit('create', data)
       this.taskData = taskClear
@@ -93,7 +96,7 @@ export default {
   display flex
   flex-wrap wrap
   justify-content space-between
-  align-items center 
+  align-items center
   background-color blue
   height 100px
   width 250
